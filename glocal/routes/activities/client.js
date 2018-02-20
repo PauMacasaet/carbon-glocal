@@ -12,7 +12,7 @@ router3.get('/', (request, response, next) => {
     });
 });
 
-router3.get('/:client', (request, response, next) => {
+router3.get('/:activity_client', (request, response, next) => {
     const { client } = request.params
     pool.query('SELECT *  FROM activities WHERE client= ($1)', [client], (err, res) => {
         if (err) return next(err);
@@ -37,7 +37,7 @@ router3.post('/', (request, response, next) => {
     );
 });
 
-router3.put('/:client', (request, response, next) => {
+router3.put('/:activity_client', (request, response, next) => {
     const { client } = request.params;
     const keys = ['trackingNo', 'timeIn', 'timeOuts', 'productCode', 'client', 'contactCustomer', 'addres', 'typeOfActivity', 'purposeOfVisit', 'activityPerformed', 'nextActivity', 'recommendations', 'engineerName', 'score'];
     const fields = [];
@@ -55,13 +55,13 @@ router3.put('/:client', (request, response, next) => {
 
                 console.log('UPDATING activity record');
 
-                if (index === fields.length - 1) response.redirect('/client');
+                if (index === fields.length - 1) response.redirect('/activity_client');
             }
         )
     });
 });
 
-router3.delete('/:client', (request, response, next) => {
+router3.delete('/:activity_client', (request, response, next) => {
     const { client } = request.params;
 
     pool.query(
@@ -69,7 +69,7 @@ router3.delete('/:client', (request, response, next) => {
         (err, res) => {
             if (err) return next(err);
 
-            response.redirect('/client');
+            response.redirect('/activity_client');
         }
     );
 });
