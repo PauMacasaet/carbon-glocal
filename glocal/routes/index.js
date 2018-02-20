@@ -24,6 +24,17 @@ const noCases = require('./client/nocases');
 //contact person
 const contactPerson = require('./contact person/contactp');
 
+//license
+const license = require('./license/license');
+
+//activities
+const activity_client = require('./activities/client');
+const addres = require('./activities/addres');
+const typeOfActivity = require('./activities/typeOfActivity');
+const purpose = require('./activities/purposeOfVisit');
+const performed = require('./activities/activityPerformed');
+const nextActivity = require('./activities/nextActivity');
+
 
 const router = Router();
 
@@ -50,5 +61,16 @@ router.use('/numbercases', noCases)
 
 //contact person
 router.use('/contactp', contactPerson);
+
+//license route
+router.use('/license', license);
+
+//activities
+router.use('/activity_client', activity_client);
+router.use('/addres', addres);
+router.use('/typeOfActivity', typeOfActivity);
+router.use('/purposeOfVisit', purpose);
+router.use('/activityPerformed', performed);
+router.use('/nextActivity', nextActivity);
 
 module.exports = router;

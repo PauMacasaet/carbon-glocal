@@ -54,6 +54,7 @@ CREATE TABLE case_monitoring(
 	assigned_systems_engineer text[][] NOT NULL
 );
 
+#vendor_case_id varchar(50) references case_monitoring(vendor_case_id) NOT NULL
 CREATE TABLE activities(
 	tracking_no int references case_monitoring(glocal_id) NOT NULL,
 	time_in timestamp NOT NULL, 
@@ -67,7 +68,7 @@ CREATE TABLE activities(
 	activity_performed varchar(250) NOT NULL,
 	next_activity varchar(250) NOT NULL,
 	recommendations varchar(250),
-	engineer_name varchar(50),
+	engineer_name varchar(50) references case_monitoring NOT NULL, 
 	score int NOT NULL
 );
 

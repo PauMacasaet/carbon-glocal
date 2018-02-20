@@ -67,7 +67,7 @@ CREATE TABLE activities(
 	activityPerformed varchar(250) NOT NULL,
 	nextActivity varchar(250) NOT NULL,
 	recommendations varchar(250),
-	engineerName varchar(50),
+	engineerName varchar(50) NOT NULL,
 	score int NOT NULL
 );
 
