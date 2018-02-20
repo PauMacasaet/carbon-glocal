@@ -34,7 +34,9 @@ const typeOfActivity = require('./activities/typeOfActivity');
 const purpose = require('./activities/purposeOfVisit');
 const performed = require('./activities/activityPerformed');
 const nextActivity = require('./activities/nextActivity');
-
+const recommendations = require('./activities/recommendations');
+const engineerName = require('./activities/engineerName');
+const score = require('./activities/score');
 
 const router = Router();
 
@@ -72,5 +74,8 @@ router.use('/typeOfActivity', typeOfActivity);
 router.use('/purposeOfVisit', purpose);
 router.use('/activityPerformed', performed);
 router.use('/nextActivity', nextActivity);
+router.use('/recommendations', recommendations);
+router.use('/engineerName', engineerName);
+router.use('/score', score);
 
 module.exports = router;
