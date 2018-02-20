@@ -37,8 +37,8 @@ router3.post('/', (request, response, next) => {
     );
 });
 
-router3.put('/:trackingNo', (request, response, next) => {
-    const { trackingNo } = request.params;
+router3.put('/:activityPerformed', (request, response, next) => {
+    const { activityPerformed } = request.params;
     const keys = ['trackingNo', 'timeIn', 'timeOuts', 'productCode', 'client', 'contactCustomer', 'addres', 'typeOfActivity', 'purposeOfVisit', 'activityPerformed', 'nextActivity', 'recommendations', 'engineerName', 'score'];
     const fields = [];
 
@@ -49,27 +49,27 @@ router3.put('/:trackingNo', (request, response, next) => {
     //partial updating
     fields.forEach((field, index) => {
         pool.query(
-            `UPDATE activities SET ${field} = ($1) WHERE trackingNo =($2)`, [request.body[field], trackingNo],
+            `UPDATE activities SET ${field} = ($1) WHERE activityPerformed =($2)`, [request.body[field], activityPerformed],
             (err, res) => {
                 if (err) return next(err);
 
                 console.log('UPDATING activity record');
 
-                if (index === fields.length - 1) response.redirect('/activities');
+                if (index === fields.length - 1) response.redirect('/activityPerformed');
             }
         )
     });
 });
 
-router3.delete('/:trackingNo', (request, response, next) => {
-    const { trackingNo } = request.params;
+router3.delete('/:activityPerformed', (request, response, next) => {
+    const { activityPerformed } = request.params;
 
     pool.query(
-        'DELETE FROM activities WHERE trackingNo = ($1)', [trackingNo],
+        'DELETE FROM activities WHERE activityPerformed = ($1)', [activityPerformed],
         (err, res) => {
             if (err) return next(err);
 
-            response.redirect('/activities');
+            response.redirect('/activityPerformed');
         }
     );
 });
