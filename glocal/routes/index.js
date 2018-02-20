@@ -40,6 +40,12 @@ const recommendations = require('./activities/recommendations');
 const engineerName = require('./activities/engineerName');
 const score = require('./activities/score');
 
+//case_monitoring
+const customerName = require('./case monitoring/customerName');
+const seLead = require('./case monitoring/systemsEngineerLead');
+const assignedAM = require('./case monitoring/assignedAccountManager');
+const assignedSE = require('./case monitoring/assignedSystemsEngineer');
+
 const router = Router();
 
 //engineer routes
@@ -81,5 +87,11 @@ router.use('/nextActivity', nextActivity);
 router.use('/recommendations', recommendations);
 router.use('/engineerName', engineerName);
 router.use('/score', score);
+
+//case_monitoring
+router.use('/customerName', customerName);
+router.use('/systemsEngineerLead', seLead);
+router.use('/assignedAccountManager', assignedAM);
+router.use('/assignedSystemsEngineer', assignedSE);
 
 module.exports = router;
