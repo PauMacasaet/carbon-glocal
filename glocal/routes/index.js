@@ -28,6 +28,8 @@ const contactPerson = require('./contact person/contactp');
 const license = require('./license/license');
 
 //activities
+const timeIn = require('./activities/timeIn');
+const timeOuts = require('./activities/timeOuts');
 const activity_client = require('./activities/client');
 const addres = require('./activities/addres');
 const typeOfActivity = require('./activities/typeOfActivity');
@@ -68,6 +70,8 @@ router.use('/contactp', contactPerson);
 router.use('/license', license);
 
 //activities
+router.use('/timeIn', timeIn);
+router.use('/timeOuts', timeOuts);
 router.use('/activity_client', activity_client);
 router.use('/addres', addres);
 router.use('/typeOfActivity', typeOfActivity);
