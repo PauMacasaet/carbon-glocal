@@ -39,11 +39,18 @@ const nextActivity = require('./activities/nextActivity');
 const recommendations = require('./activities/recommendations');
 const score = require('./activities/score');
 
-//case_monitoring
-const customerName = require('./case monitoring/customerName');
-const seLead = require('./case monitoring/systemsEngineerLead');
-const assignedAM = require('./case monitoring/assignedAccountManager');
-const assignedSE = require('./case monitoring/assignedSystemsEngineer');
+//case monitoring
+const glocalid = require('./casemonitoring/glocalid');
+const vendorcaseid = require('./casemonitoring/vendorcaseid');
+const datecreated = require('./casemonitoring/datecreated');
+const dateraised = require('./casemonitoring/dateraised');
+const casetitle = require('./casemonitoring/casetitle');
+const casedesc = require('./casemonitoring/casedesc');
+const severity = require('./casemonitoring/severity');
+const customerName = require('./casemonitoring/customerName');
+const seLead = require('./casemonitoring/systemsEngineerLead');
+const assignedAM = require('./casemonitoring/assignedAccountManager');
+const assignedSE = require('./casemonitoring/assignedSystemsEngineer');
 
 const router = Router();
 
@@ -86,7 +93,14 @@ router.use('/nextActivity', nextActivity);
 router.use('/recommendations', recommendations);
 router.use('/score', score);
 
-//case_monitoring
+//case monitoring
+router.use('/glocalid', glocalid);
+router.use('/vendorcaseid', vendorcaseid);
+router.use('/datecreated', datecreated);
+router.use('/dateraised', dateraised);
+router.use('/casetitle', casetitle);
+router.use('/casedesc', casedesc);
+router.use('/severity', severity);
 router.use('/customerName', customerName);
 router.use('/systemsEngineerLead', seLead);
 router.use('/assignedAccountManager', assignedAM);

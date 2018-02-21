@@ -12,9 +12,9 @@ router3.get('/', (request, response, next) => {
     });
 });
 
-router3.get('/:assignedSystemsEngineer', (request, response, next) => {
-    const { assignedSystemsEngineer } = request.params
-    pool.query('SELECT *  FROM case_monitoring WHERE assignedSystemsEngineer= ($1)', [assignedSystemsEngineer], (err, res) => {
+router3.get('/:trackingNo', (request, response, next) => {
+    const { trackingNo } = request.params
+    pool.query('SELECT assignedSystemsEngineer FROM case_monitoring WHERE glocalId = ($1)', [trackingNo], (err, res) => {
         if (err) return next(err);
 
         console.log('RETRIEVING LIST BY ASSIGNED SE');
@@ -26,8 +26,7 @@ router3.post('/', (request, response, next) => {
     const { glocalId, vendorCaseId, dateIdCreated, dateRaised, caseTitle, caseDescription, severity, vendor, customer, productLine, customerName, systemsEngineerLead, assignedAccountManager, assignedSystemsEngineer } = request.body;
 
     pool.query(
-        'INSERT INTO case_monitoring( glocalId, vendorCaseId, dateIdCreated, dateRaised, caseTitle, caseDescription, severity, vendor, customer, productLine, customerName, systemsEngineerLead, assignedAccountManager, assignedSystemsEngineer ) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)', 
-        [glocalId, vendorCaseId, dateIdCreated, dateRaised, caseTitle, caseDescription, severity, vendor, customer, productLine, customerName, systemsEngineerLead, assignedAccountManager, assignedSystemsEngineer],
+        'INSERT INTO case_monitoring( glocalId, vendorCaseId, dateIdCreated, dateRaised, caseTitle, caseDescription, severity, vendor, customer, productLine, customerName, systemsEngineerLead, assignedAccountManager, assignedSystemsEngineer ) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)', [glocalId, vendorCaseId, dateIdCreated, dateRaised, caseTitle, caseDescription, severity, vendor, customer, productLine, customerName, systemsEngineerLead, assignedAccountManager, assignedSystemsEngineer],
         (err, res) => {
             if (err) return next(err);
 
