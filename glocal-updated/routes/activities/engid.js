@@ -12,12 +12,12 @@ router3.get('/', (request, response, next) => {
     });
 });
 
-router3.get('/:recommendations', (request, response, next) => {
-    const { recommendations } = request.params
-    pool.query('SELECT *  FROM activities WHERE recommendations= ($1)', [recommendations], (err, res) => {
+router3.get('/:engid', (request, response, next) => {
+    const { engid } = request.params
+    pool.query('SELECT engid, productCode, typeOfActivity, purposeOfVisit, activityPerformed, nextActivity, recommendations, engineerName AS Last_Name, score FROM activities WHERE engid= ($1)', [engid], (err, res) => {
         if (err) return next(err);
 
-        console.log('RETRIEVING LIST BY RECOMMENDATIONS');
+        console.log('RETRIEVING LIST from activities bY engid');
         response.json(res.rows);
     });
 });
@@ -31,13 +31,13 @@ router3.post('/', (request, response, next) => {
             if (err) return next(err);
 
             console.log('activity created');
-            response.redirect('/recommendations'); //yung route mismo
+            response.redirect('/engid'); //yung route mismo
         }
     );
 });
 
-router3.put('/:recommendations', (request, response, next) => {
-    const { recommendations } = request.params;
+router3.put('/:engid', (request, response, next) => {
+    const { engid } = request.params;
     const keys = ['trackingNo', 'timeIn', 'timeOuts', 'productCode', 'client', 'contactCustomer', 'addres', 'typeOfActivity', 'purposeOfVisit', 'activityPerformed', 'nextActivity', 'recommendations', 'engid', 'engineerName', 'score'];
     const fields = [];
 
@@ -48,27 +48,27 @@ router3.put('/:recommendations', (request, response, next) => {
     //partial updating
     fields.forEach((field, index) => {
         pool.query(
-            `UPDATE activities SET ${field} = ($1) WHERE recommendations =($2)`, [request.body[field], recommendations],
+            `UPDATE activities SET ${field} = ($1) WHERE engid =($2)`, [request.body[field], engid],
             (err, res) => {
                 if (err) return next(err);
 
                 console.log('UPDATING activity record');
 
-                if (index === fields.length - 1) response.redirect('/recommendations');
+                if (index === fields.length - 1) response.redirect('/engid');
             }
         )
     });
 });
 
-router3.delete('/:recommendations', (request, response, next) => {
-    const { recommendations } = request.params;
+router3.delete('/:engid', (request, response, next) => {
+    const { engid } = request.params;
 
     pool.query(
-        'DELETE FROM activities WHERE recommendations = ($1)', [recommendations],
+        'DELETE FROM activities WHERE engid = ($1)', [engid],
         (err, res) => {
             if (err) return next(err);
 
-            response.redirect('/recommendations');
+            response.redirect('/engid');
         }
     );
 });

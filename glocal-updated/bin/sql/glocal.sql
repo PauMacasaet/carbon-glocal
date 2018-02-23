@@ -1,6 +1,6 @@
 
 CREATE TABLE engineer(
-	engId int PRIMARY KEY NOT NULL,
+	engId int  unique PRIMARY KEY NOT NULL,
 	department varchar(50) NOT NULL,
 	firstName varchar(50) NOT NULL,
 	lastName varchar(50) NOT NULL
@@ -67,7 +67,8 @@ CREATE TABLE activities(
 	activityPerformed varchar(250) NOT NULL,
 	nextActivity varchar(250) NOT NULL,
 	recommendations varchar(250),
-	engineerName varchar(50) NOT NULL,
+	engid int references engineer(engId) NOT NULL,
+	engineerName varchar(50),
 	score int NOT NULL
 );
 
@@ -107,10 +108,10 @@ VALUES
 (2018-001,'2018-100','01/08/2018','01/07/2018','Attend to failure of backup','troubleshoot',1,'Veritas','Unionbank','SFVVR','John Karlo Tabios','Jefferson','Mei',ARRAY[['John Jenkins'],['Isaiah Solomon']]),
 (2018-002,'2018-111','03/08/2018','03/07/2018','Fix server for backup','install updates',1,'Symmantec','BPI','JHTEY','John Vincent Agbayani','Jeffrey','Maan',ARRAY['Aaron Hernandez']);
 
-INSERT INTO activities(trackingNo, timeIn, timeOuts, productCode, client,  contactCustomer, addres, typeOfActivity, purposeOfVisit, activityPerformed, nextActivity, recommendations, engineerName, score)
+INSERT INTO activities(trackingNo, timeIn, timeOuts, productCode, client,  contactCustomer, addres, typeOfActivity, purposeOfVisit, activityPerformed, nextActivity, recommendations, engid, engineerName, score)
 VALUES
-(2018-001, '2018-01-08 12:24:00', '2018-01-08 15:05:00', 'SFVVR','Unionbank','John Karlo','unionbank','OnSite','troubleshoot','checked if modules are up to date','install updates','no recommendations','Jenkins', 5),
-(2018-002,'2018-03-08 13:32:00','2018-03-08 16:22:00', 'JHTEY','BPI', 'John Vincent', 'BPI','Remote','troubleshooting','check version of software','install updates',' no recommendations','Hernandez',4);
+(2018-001, '2018-01-08 12:24:00', '2018-01-08 15:05:00', 'SFVVR','Unionbank','John Karlo','unionbank','OnSite','troubleshoot','checked if modules are up to date','install updates', 'no recommendations',001,'Jenkins', 5),
+(2018-002,'2018-03-08 13:32:00','2018-03-08 16:22:00', 'JHTEY','BPI', 'John Vincent', 'BPI','Remote','troubleshooting','check version of software','install updates',' no recommendations',003,'Hernandez',4);
 
 
 
