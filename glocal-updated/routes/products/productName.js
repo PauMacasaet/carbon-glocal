@@ -26,7 +26,7 @@ router5.post('/', (request, response, next) => {
     const { productName, vendor } = request.body;
 
     pool.query(
-        'INSERT INTO products( productName, vendor,) VALUES($1, $2)', [productName, vendor],
+        'INSERT INTO products( productName, vendor) VALUES($1, $2)', [productName, vendor],
         (err, res) => {
             if (err) return next(err);
 
