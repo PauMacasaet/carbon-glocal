@@ -12,6 +12,7 @@ const principal = require('./vendor/vendor');
 const productName = require('./products/productName');
 const productLine = require('./products/productLine');
 const category = require('./products/category');
+const vendor = require('./products/productVendor');
 
 //client table
 const accountName = require('./client/accountname');
@@ -23,6 +24,7 @@ const noCases = require('./client/nocases');
 
 //contact person
 const contactPerson = require('./contact person/contactp');
+const contactClient = require('./contact person/contactc');
 
 //license
 const license = require('./license/license');
@@ -68,6 +70,7 @@ router.use('/vendor', principal);
 router.use('/products', productName);
 router.use('/code', productLine)
 router.use('/category', category);
+router.use('/productvendor', vendor)
 
 //client
 router.use('/client', accountName);
@@ -79,6 +82,7 @@ router.use('/numbercases', noCases)
 
 //contact person
 router.use('/contactp', contactPerson);
+router.use('/contactc', contactClient);
 
 //license route
 router.use('/license', license);
