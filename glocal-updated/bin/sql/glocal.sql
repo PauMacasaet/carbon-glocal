@@ -12,12 +12,10 @@ CREATE TABLE vendor(
 
 CREATE TABLE client(
 	accountName varchar(50) PRIMARY KEY NOT NULL,
-	priorityClient boolean NOT NULL, 
-	dateExpired date NOT NULL,
-	activeContract boolean NOT NULL,
-	contactEmail varchar(50),
-	contactNumber int,
-	noCases int NOT NULL
+	contact_details json NOT NULL,
+	company_address varchar(100) NOT NULL,
+	systemEngineerLead varchar(50),
+	accountManager varchar(50) NOT NULL
 );
 
 CREATE TABLE products(
@@ -66,7 +64,7 @@ CREATE TABLE activities(
 	nextActivity varchar(250) NOT NULL,
 	recommendations varchar(250),
 	engid int references engineer(engId) NOT NULL,
-	engineerName varchar(50)
+	assignedEngineers text[][] NOT NULL
 );
 
 INSERT INTO engineer(engId, department, firstName, lastName)
@@ -80,10 +78,10 @@ VALUES
 ('Symmantec'),
 ('Veritas');
 
-INSERT INTO client(accountName, priorityClient, dateExpired, activeContract, contactEmail, contactNumber, noCases)
+INSERT INTO client(accountName, contact_details, company_address, systemEngineerLead, accountManager)
 VALUES
-('Unionbank', TRUE, '03/08/2019', TRUE, 'unionbank@gmail.com',854321, 1),
-('BPI',FALSE,'06/25/2018',TRUE, 'bpi@gmail.com',123456, 0);
+('Unionbank', '[{"Customer_Name":"Mareeah Koochenera","Email":"marreah@gmail.com","Contact_Number":"09178456789"}]','157 HV Dela Costa','Richard','Mei' ),
+('BPI', '[{"Customer_Name":"Garrosh","Email":"garrosh@gmail.com","Contact_Number":"09176230789"}]','15 Jupiter','Jonathan','Mara');
 
 INSERT INTO products(productName, vendor)
 VALUES
@@ -105,10 +103,10 @@ VALUES
 (2018-001,'2018-100','01/08/2018','01/07/2018','Attend to failure of backup','troubleshoot',1,'Veritas','Unionbank','Multi-Cloud','John Karlo Tabios','Jefferson','Mei',ARRAY[['John Jenkins'],['Isaiah Solomon']]),
 (2018-002,'2018-111','03/08/2018','03/07/2018','Fix server for backup','install updates',1,'Symmantec','BPI','Secure Web Gateway','John Vincent Agbayani','Jeffrey','Maan',ARRAY['Aaron Hernandez']);
 
-INSERT INTO activities(trackingNo, timeIn, timeOuts, productName, client,  contactCustomer, addres, typeOfActivity, purposeOfVisit, activityPerformed, nextActivity, recommendations, engid, engineerName)
+INSERT INTO activities(trackingNo, timeIn, timeOuts, productName, client,  contactCustomer, addres, typeOfActivity, purposeOfVisit, activityPerformed, nextActivity, recommendations, engid, assignedEngineers)
 VALUES
-(2018-001, '2018-01-08 12:24:00', '2018-01-08 15:05:00', 'Multi-Cloud','Unionbank','John Karlo','unionbank','OnSite','troubleshoot','checked if modules are up to date','install updates', 'no recommendations',001,'Jenkins'),
-(2018-002,'2018-03-08 13:32:00','2018-03-08 16:22:00', 'Secure Web Gateway','BPI', 'John Vincent', 'BPI','Remote','troubleshooting','check version of software','install updates',' no recommendations',003,'Hernandez');
+(2018-001, '2018-01-08 12:24:00', '2018-01-08 15:05:00', 'Multi-Cloud','Unionbank','John Karlo','unionbank','OnSite','troubleshoot','checked if modules are up to date','install updates', 'no recommendations',001,ARRAY[['John Jenkins'],['Aaron Hernandez']]),
+(2018-002,'2018-03-08 13:32:00','2018-03-08 16:22:00', 'Secure Web Gateway','BPI', 'John Vincent', 'BPI','Remote','troubleshooting','check version of software','install updates',' no recommendations',002,ARRAY['Isaiah Solomon']);
 
 
 

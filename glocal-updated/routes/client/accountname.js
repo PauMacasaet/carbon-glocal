@@ -1,9 +1,9 @@
 const { Router } = require('express');
 const pool = require('../../db');
 
-const router8 = Router();
+const router11 = Router();
 
-router8.get('/', (request, response, next) => {
+router11.get('/', (request, response, next) => {
     pool.query('SELECT * from client', (err, res) => {
         if (err) return next(err);
 
@@ -12,33 +12,33 @@ router8.get('/', (request, response, next) => {
     });
 });
 
-router8.get('/:accountName', (request, response, next) => {
+router11.get('/:accountName', (request, response, next) => {
     const { accountName } = request.params
-    pool.query('SELECT *  FROM client WHERE accountName = ($1)', [accountName], (err, res) => {
+    pool.query('SELECT * FROM client WHERE accountName = ($1)', [accountName], (err, res) => {
         if (err) return next(err);
 
-        console.log('RETRIEVING LIST BY accountName');
+        console.log('RETRIEVING LIST BY account name');
         response.json(res.rows);
     });
 });
 
-router8.post('/', (request, response, next) => {
-    const { accountName, priorityClient, dateExpired, activeContract, contactEmail, contactNumber, noCases } = request.body;
+router11.post('/', (request, response, next) => {
+    const { accountName, contact_details, company_address, systemEngineerLead, accountManager } = request.body;
 
     pool.query(
-        'INSERT INTO client(accountName, priorityClient, dateExpired, activeContract, contactEmail, contactNumber, noCases) VALUES($1, $2, $3, $4, $5, $6, $7)', [accountName, priorityClient, dateExpired, activeContract, contactEmail, contactNumber, noCases],
+        'INSERT INTO client(accountName, contact_details, company_address, systemEngineerLead, accountManager) VALUES($1, $2, $3, $4, $5)', [accountName, contact_details, company_address, systemEngineerLead, accountManager],
         (err, res) => {
             if (err) return next(err);
 
             console.log('NEW client CREATED');
-            response.redirect('/client');
+            response.redirect('/accountname');
         }
     );
 });
 
-router8.put('/:accountName', (request, response, next) => {
+router11.put('/:accountName', (request, response, next) => {
     const { accountName } = request.params;
-    const keys = ['accountName', 'priorityClient', 'dateExpired', 'activeContract', 'contactEmail', 'contactNumber', 'noCases'];
+    const keys = ['accountName', 'contact_details', 'company_address', 'systemEngineerLead', 'accountManager'];
     const fields = [];
 
     keys.forEach(key => {
@@ -48,29 +48,29 @@ router8.put('/:accountName', (request, response, next) => {
     //partial updating
     fields.forEach((field, index) => {
         pool.query(
-            `UPDATE client SET ${field} = ($1) WHERE accountName =($2)`, [request.body[field], accountName],
+            `UPDATE client SET ${field} = ($1) WHERE accountName =($2)`, [request.body[field], client],
             (err, res) => {
                 if (err) return next(err);
 
                 console.log('UPDATED client record');
 
-                if (index === fields.length - 1) response.redirect('/client');
+                if (index === fields.length - 1) response.redirect('/accountname');
             }
         )
     });
 });
 
-router8.delete('/:accountName', (request, response, next) => {
-    const { accountName } = request.params;
+router11.delete('/:client', (request, response, next) => {
+    const { client } = request.params;
 
     pool.query(
-        'DELETE FROM products WHERE accountName = ($1)', [accountName],
+        'DELETE FROM client WHERE client = ($1)', [client],
         (err, res) => {
             if (err) return next(err);
 
             console.log('deleted record from client');
-            response.redirect('/client');
+            response.redirect('/accountname');
         }
     );
 });
-module.exports = router8;
+module.exports = router11;

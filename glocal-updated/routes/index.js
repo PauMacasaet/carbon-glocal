@@ -14,11 +14,7 @@ const productvendor = require('./products/productvendor');
 
 //client table
 const accountName = require('./client/accountname');
-const priorityClient = require('./client/priorityclient');
-const activeContract = require('./client/activecontract');
-const contactEmail = require('./client/contactEmail');
-const contactNumber = require('./client/contactnumber');
-const noCases = require('./client/nocases');
+
 
 //contact person
 const contactPerson = require('./contact person/contactp');
@@ -69,11 +65,6 @@ router.use('/productvendor', productvendor);
 
 //client
 router.use('/client', accountName);
-router.use('/priority', priorityClient);
-router.use('/active', activeContract);
-router.use('/email', contactEmail);
-router.use('/number', contactNumber);
-router.use('/numbercases', noCases)
 
 //contact person
 router.use('/contactp', contactPerson);
