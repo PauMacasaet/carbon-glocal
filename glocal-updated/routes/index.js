@@ -10,8 +10,6 @@ const principal = require('./vendor/vendor');
 
 //products table
 const productName = require('./products/productName');
-const productLine = require('./products/productLine');
-const category = require('./products/category');
 const productvendor = require('./products/productvendor');
 
 //client table
@@ -39,7 +37,6 @@ const purpose = require('./activities/purposeOfVisit');
 const performed = require('./activities/activityPerformed');
 const nextActivity = require('./activities/nextActivity');
 const recommendations = require('./activities/recommendations');
-const score = require('./activities/score');
 const engineername = require('./activities/engineername');
 const engid = require('./activities/engid');
 
@@ -68,8 +65,6 @@ router.use('/vendor', principal);
 
 //products routes
 router.use('/products', productName);
-router.use('/code', productLine)
-router.use('/category', category);
 router.use('/productvendor', productvendor);
 
 //client
@@ -97,7 +92,6 @@ router.use('/purposeOfVisit', purpose);
 router.use('/activityPerformed', performed);
 router.use('/nextActivity', nextActivity);
 router.use('/recommendations', recommendations);
-router.use('/score', score);
 router.use('/engineername', engineername);
 router.use('/engid', engid);
 

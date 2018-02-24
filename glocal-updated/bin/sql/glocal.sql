@@ -22,9 +22,7 @@ CREATE TABLE client(
 
 CREATE TABLE products(
 	productName varchar(50) PRIMARY KEY NOT NULL,
-	productLine varchar(50) unique NOT NULL,	
-	vendor varchar(50) references vendor(principal) NOT NULL,
-	category varchar(50) NOT NULL
+	vendor varchar(50) references vendor(principal) NOT NULL
 );
 
 CREATE TABLE license(
@@ -47,7 +45,7 @@ CREATE TABLE case_monitoring(
 	severity int NOT NULL,
 	vendor varchar(50) NOT NULL,
 	customer varchar(50) references client(accountName) NOT NULL,
-	productLine varchar(50) references products(productLine) NOT NULL,
+	productLine varchar(50) NOT NULL,
 	customerName varchar(50) NOT NULL,
 	systemsEngineerLead varchar(50),
 	assignedAccountManager varchar(50) NOT NULL,
@@ -58,7 +56,7 @@ CREATE TABLE activities(
 	trackingNo int references case_monitoring(glocalId) NOT NULL,
 	timeIn timestamp NOT NULL, 
 	timeOuts timestamp NOT NULL,
-	productCode varchar(50) references products(productLine) NOT NULL,
+	productCode varchar(50) NOT NULL,
 	client varchar(50) NOT NULL,
 	contactCustomer varchar(50) references contact_person(personName) NOT NULL,
 	addres varchar(50) NOT NULL, 
@@ -68,8 +66,7 @@ CREATE TABLE activities(
 	nextActivity varchar(250) NOT NULL,
 	recommendations varchar(250),
 	engid int references engineer(engId) NOT NULL,
-	engineerName varchar(50),
-	score int NOT NULL
+	engineerName varchar(50)
 );
 
 INSERT INTO engineer(engId, department, firstName, lastName)
@@ -88,10 +85,10 @@ VALUES
 ('Unionbank', TRUE, '03/08/2019', TRUE, 'unionbank@gmail.com',854321, 1),
 ('BPI',FALSE,'06/25/2018',TRUE, 'bpi@gmail.com',123456, 0);
 
-INSERT INTO products(productName, productLine, vendor, category)
+INSERT INTO products(productName, vendor)
 VALUES
-('Multi-Cloud','SFVVR','Veritas','Security'),
-('Secure Web Gateway','JHTEY','Symmantec','Security');
+('Multi-Cloud','Veritas'),
+('Secure Web Gateway','Symmantec');
 
 INSERT INTO license(product, license)
 VALUES
@@ -108,10 +105,10 @@ VALUES
 (2018-001,'2018-100','01/08/2018','01/07/2018','Attend to failure of backup','troubleshoot',1,'Veritas','Unionbank','SFVVR','John Karlo Tabios','Jefferson','Mei',ARRAY[['John Jenkins'],['Isaiah Solomon']]),
 (2018-002,'2018-111','03/08/2018','03/07/2018','Fix server for backup','install updates',1,'Symmantec','BPI','JHTEY','John Vincent Agbayani','Jeffrey','Maan',ARRAY['Aaron Hernandez']);
 
-INSERT INTO activities(trackingNo, timeIn, timeOuts, productCode, client,  contactCustomer, addres, typeOfActivity, purposeOfVisit, activityPerformed, nextActivity, recommendations, engid, engineerName, score)
+INSERT INTO activities(trackingNo, timeIn, timeOuts, productCode, client,  contactCustomer, addres, typeOfActivity, purposeOfVisit, activityPerformed, nextActivity, recommendations, engid, engineerName)
 VALUES
-(2018-001, '2018-01-08 12:24:00', '2018-01-08 15:05:00', 'SFVVR','Unionbank','John Karlo','unionbank','OnSite','troubleshoot','checked if modules are up to date','install updates', 'no recommendations',001,'Jenkins', 5),
-(2018-002,'2018-03-08 13:32:00','2018-03-08 16:22:00', 'JHTEY','BPI', 'John Vincent', 'BPI','Remote','troubleshooting','check version of software','install updates',' no recommendations',003,'Hernandez',4);
+(2018-001, '2018-01-08 12:24:00', '2018-01-08 15:05:00', 'SFVVR','Unionbank','John Karlo','unionbank','OnSite','troubleshoot','checked if modules are up to date','install updates', 'no recommendations',001,'Jenkins'),
+(2018-002,'2018-03-08 13:32:00','2018-03-08 16:22:00', 'JHTEY','BPI', 'John Vincent', 'BPI','Remote','troubleshooting','check version of software','install updates',' no recommendations',003,'Hernandez');
 
 
 

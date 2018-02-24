@@ -23,10 +23,10 @@ router6.get('/:vendor', (request, response, next) => {
 });
 
 router6.post('/', (request, response, next) => {
-    const { productName, productLine, vendor, category } = request.body;
+    const { productName, vendor } = request.body;
 
     pool.query(
-        'INSERT INTO products( productName, productLine, vendor, category) VALUES($1, $2, $3, $4)', [productName, productLine, vendor, category],
+        'INSERT INTO products( productName, vendor) VALUES($1, $2)', [productName, vendor],
         (err, res) => {
             if (err) return next(err);
 
@@ -38,7 +38,7 @@ router6.post('/', (request, response, next) => {
 
 router6.put('/:vendor', (request, response, next) => {
     const { vendor } = request.params;
-    const keys = ['productName', 'productLine', 'vendor', 'category'];
+    const keys = ['productName', 'vendor'];
     const fields = [];
 
     keys.forEach(key => {
