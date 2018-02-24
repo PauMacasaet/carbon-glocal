@@ -12,7 +12,7 @@ const principal = require('./vendor/vendor');
 const productName = require('./products/productName');
 const productLine = require('./products/productLine');
 const category = require('./products/category');
-const vendor = require('./products/productVendor');
+const productvendor = require('./products/productvendor');
 
 //client table
 const accountName = require('./client/accountname');
@@ -70,7 +70,7 @@ router.use('/vendor', principal);
 router.use('/products', productName);
 router.use('/code', productLine)
 router.use('/category', category);
-router.use('/productvendor', vendor)
+router.use('/productvendor', productvendor);
 
 //client
 router.use('/client', accountName);
