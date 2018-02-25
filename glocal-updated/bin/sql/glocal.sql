@@ -7,7 +7,7 @@ CREATE TABLE engineer(
 );
 
 CREATE TABLE vendor(
-	principal varchar(50) unique NOT NULL
+	principal varchar(50) unique PRIMARY KEY NOT NULL
 );
 
 CREATE TABLE client(
@@ -20,7 +20,7 @@ CREATE TABLE client(
 
 CREATE TABLE products(
 	productName varchar(50) unique PRIMARY KEY NOT NULL,
-	vendor varchar(50) references vendor(principal) NOT NULL
+	vendor varchar(50) references vendor(principal) ON UPDATE CASCADE NOT NULL
 );
 
 CREATE TABLE license(
