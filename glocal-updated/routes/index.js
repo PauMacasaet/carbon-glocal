@@ -35,6 +35,7 @@ const nextActivity = require('./activities/nextActivity');
 const recommendations = require('./activities/recommendations');
 const engineername = require('./activities/engineername');
 const engid = require('./activities/engid');
+const trackingNo = require('./activities/trackingNo');
 
 //case monitoring
 const glocalid = require('./casemonitoring/glocalid');
@@ -85,6 +86,7 @@ router.use('/nextActivity', nextActivity);
 router.use('/recommendations', recommendations);
 router.use('/engineername', engineername);
 router.use('/engid', engid);
+router.use('/trackingno', trackingNo);
 
 //case monitoring
 router.use('/glocalid', glocalid);

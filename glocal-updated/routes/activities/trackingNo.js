@@ -12,9 +12,9 @@ router3.get('/', (request, response, next) => {
     });
 });
 
-router3.get('/:engid', (request, response, next) => {
-    const { engid } = request.params
-    pool.query('SELECT trackingNo, engid, productName, typeOfActivity, purposeOfVisit, activityPerformed, nextActivity, recommendations, engineerName as engineerSurname FROM activities WHERE engid= ($1)', [engid], (err, res) => {
+router3.get('/:trackingNo', (request, response, next) => {
+    const { trackingNo } = request.params
+    pool.query('SELECT engid, productName, typeOfActivity, purposeOfVisit, activityPerformed, nextActivity, recommendations, engineerName as engineerSurname FROM activities WHERE trackingNo= ($1)', [trackingNo], (err, res) => {
         if (err) return next(err);
 
         console.log('RETRIEVING LIST from activities bY engid');
@@ -31,13 +31,13 @@ router3.post('/', (request, response, next) => {
             if (err) return next(err);
 
             console.log('activity created');
-            response.redirect('/engid'); //yung route mismo
+            response.redirect('/trackingno'); //yung route mismo
         }
     );
 });
 
-router3.put('/:engid', (request, response, next) => {
-    const { engid } = request.params;
+router3.put('/:trackingNo', (request, response, next) => {
+    const { trackingNo } = request.params;
     const keys = ['trackingNo', 'timeIn', 'timeOuts', 'productName', 'client', 'contactCustomer', 'addres', 'typeOfActivity', 'purposeOfVisit', 'activityPerformed', 'nextActivity', 'recommendations', 'engid', 'engineerName'];
     const fields = [];
 
@@ -48,27 +48,27 @@ router3.put('/:engid', (request, response, next) => {
     //partial updating
     fields.forEach((field, index) => {
         pool.query(
-            `UPDATE activities SET ${field} = ($1) WHERE engid =($2)`, [request.body[field], engid],
+            `UPDATE activities SET ${field} = ($1) WHERE trackingNo =($2)`, [request.body[field], trackingNo],
             (err, res) => {
                 if (err) return next(err);
 
                 console.log('UPDATING activity record');
 
-                if (index === fields.length - 1) response.redirect('/engid');
+                if (index === fields.length - 1) response.redirect('/trackingNo');
             }
         )
     });
 });
 
-router3.delete('/:engid', (request, response, next) => {
-    const { engid } = request.params;
+router3.delete('/:trackingNo', (request, response, next) => {
+    const { trackingNo } = request.params;
 
     pool.query(
-        'DELETE FROM activities WHERE engid = ($1)', [engid],
+        'DELETE FROM activities WHERE trackingNo = ($1)', [trackingNo],
         (err, res) => {
             if (err) return next(err);
 
-            response.redirect('/engid');
+            response.redirect('/trackingNo');
         }
     );
 });
