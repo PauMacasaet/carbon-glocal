@@ -31,7 +31,7 @@ router6.post('/', (request, response, next) => {
             if (err) return next(err);
 
             console.log('NEW PRODUCT CREATED');
-            response.redirect('/vendor');
+            response.redirect('/productVendor');
         }
     );
 });
@@ -54,7 +54,7 @@ router6.put('/:vendor', (request, response, next) => {
 
                 console.log('UPDATED products record');
 
-                if (index === fields.length - 1) response.redirect('/vendor');
+                if (index === fields.length - 1) response.redirect('/productVendor');
             }
         )
     });
@@ -69,7 +69,7 @@ router6.delete('/:vendor', (request, response, next) => {
             if (err) return next(err);
 
             console.log('deleted record from products');
-            response.redirect('/vendor');
+            response.redirect('/productVendor');
         }
     );
 });
