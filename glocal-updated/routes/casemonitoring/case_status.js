@@ -12,12 +12,12 @@ router3.get('/', (request, response, next) => {
     });
 });
 
-router3.get('/:customerName', (request, response, next) => {
-    const { customerName } = request.params
-    pool.query('SELECT *  FROM case_monitoring WHERE customerName= ($1)', [customerName], (err, res) => {
+router3.get('/:case_status', (request, response, next) => {
+    const { case_status } = request.params
+    pool.query('SELECT case_status FROM case_monitoring WHERE case_status = ($1)', [case_status], (err, res) => {
         if (err) return next(err);
 
-        console.log('RETRIEVING LIST BY CUSTOMERNAME');
+        console.log('RETRIEVING LIST BY CASE STATUS');
         response.json(res.rows);
     });
 });

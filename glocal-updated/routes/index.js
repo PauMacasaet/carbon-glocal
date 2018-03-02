@@ -49,26 +49,27 @@ const customerName = require('./casemonitoring/customerName');
 const seLead = require('./casemonitoring/systemsEngineerLead');
 const assignedAM = require('./casemonitoring/assignedAccountManager');
 const assignedSE = require('./casemonitoring/assignedSystemsEngineer');
+const caseStatus = require('./casemonitoring/case_status');
 
 const router = Router();
 
 //engineer routes
-router.use('/engineer', engId);
+router.use('/engineer', engId); //create and update
 router.use('/name', name);
 router.use('/department', department);
 
 //vendor routes
-router.use('/vendor', principal);
+router.use('/vendor', principal); //create and update
 
 //products routes
-router.use('/products', productName);
+router.use('/products', productName); //create and update
 router.use('/productvendor', productvendor);
 
 //client
-router.use('/client', accountName);
+router.use('/client', accountName); //create and update
 
 //contact person
-router.use('/contactp', contactPerson);
+router.use('/contactp', contactPerson); //create and update
 router.use('/contactc', contactClient);
 
 //license route
@@ -85,11 +86,11 @@ router.use('/activityPerformed', performed);
 router.use('/nextActivity', nextActivity);
 router.use('/recommendations', recommendations);
 router.use('/engineername', engineername);
-router.use('/engid', engid);
-router.use('/trackingno', trackingNo);
+router.use('/engid', engid); 
+router.use('/trackingno', trackingNo); //create and update
 
 //case monitoring
-router.use('/glocalid', glocalid);
+router.use('/glocalid', glocalid); //create and update
 router.use('/vendorcaseid', vendorcaseid);
 router.use('/datecreated', datecreated);
 router.use('/dateraised', dateraised);
@@ -100,5 +101,6 @@ router.use('/customerName', customerName);
 router.use('/systemsEngineerLead', seLead);
 router.use('/assignedAccountManager', assignedAM);
 router.use('/assignedSystemsEngineer', assignedSE);
+router.use('/case_status', caseStatus);
 
 module.exports = router;
