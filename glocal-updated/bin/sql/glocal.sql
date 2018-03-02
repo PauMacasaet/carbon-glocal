@@ -47,7 +47,8 @@ CREATE TABLE case_monitoring(
 	customerName varchar(50) NOT NULL,
 	systemsEngineerLead varchar(50),
 	assignedAccountManager varchar(50) NOT NULL,
-	assignedSystemsEngineer text[][] NOT NULL
+	assignedSystemsEngineer text[][] NOT NULL,
+	case_status varchar(50) NOT NULL
 );
 
 CREATE TABLE activities(
@@ -98,10 +99,12 @@ VALUES
 ('BPI','John Vincent'),
 ('Unionbank','John Karlo');
 
-INSERT INTO case_monitoring(glocalId, vendorCaseId, dateIdCreated, dateRaised, caseTitle, caseDescription, severity, vendor, customer, productName, customerName, systemsEngineerLead, assignedAccountManager, assignedSystemsEngineer)
+INSERT INTO case_monitoring(glocalId, vendorCaseId, dateIdCreated, dateRaised, caseTitle, caseDescription, severity, vendor, customer, productName, customerName, systemsEngineerLead, assignedAccountManager, assignedSystemsEngineer, case_status)
 VALUES
-(2018-001,'2018-100','01/08/2018','01/07/2018','Attend to failure of backup','troubleshoot',1,'Veritas','Unionbank','Multi-Cloud','John Karlo Tabios','Jefferson','Mei',ARRAY[['John Jenkins'],['Isaiah Solomon']]),
-(2018-002,'2018-111','03/08/2018','03/07/2018','Fix server for backup','install updates',1,'Symmantec','BPI','Secure Web Gateway','John Vincent Agbayani','Jeffrey','Maan',ARRAY['Aaron Hernandez']);
+(2018-001,'2018-100','01/08/2018','01/07/2018','Attend to failure of backup','troubleshoot',1,'Veritas','Unionbank','Multi-Cloud','John Karlo Tabios','Jefferson','Mei',ARRAY[['John Jenkins'],['Isaiah Solomon']], 'may status'),
+(2018-002,'2018-111','03/08/2018','03/07/2018','Fix server for backup','install updates',1,'Symmantec','BPI','Secure Web Gateway','John Vincent Agbayani','Jeffrey','Maan',ARRAY['Aaron Hernandez'], 'anong status status')
+(2018-004, '2018-112','04/04/2018', '04/01/2018', 'Error 404', 'fix error', 2, 'Veritas', 'BPI', 'Secure Web Gateway', 'John Karlo Tabios', 'Jefferson', 'Mei', ARRAY[['Aaron Hernandez']], 'may status');
+
 
 INSERT INTO activities(trackingNo, timeIn, timeOuts, productName, client,  contactCustomer, addres, typeOfActivity, purposeOfVisit, activityPerformed, nextActivity, recommendations, engid, engineerName)
 VALUES
