@@ -56,7 +56,7 @@ CREATE TABLE case_monitoring(
 	productName varchar(50) references products(productName) ON DELETE CASCADE NOT NULL,
 	customerName varchar(50) NOT NULL,
 	systemsEngineerLead varchar(50),
-	assignedAccountManager varchar(50) NOT NULL,
+	assignedAccountManager varchar(50),
 	assignedSystemsEngineer text[][] NOT NULL,
 	case_status varchar(50) NOT NULL
 );
