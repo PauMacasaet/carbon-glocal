@@ -51,6 +51,9 @@ const assignedAM = require('./casemonitoring/assignedAccountManager');
 const assignedSE = require('./casemonitoring/assignedSystemsEngineer');
 const caseStatus = require('./casemonitoring/case_status');
 
+//stats
+const totalCases = require('./stats/totalCases');
+
 const router = Router();
 
 //engineer routes
@@ -103,5 +106,8 @@ router.use('/systemsEngineerLead', seLead);
 router.use('/assignedAccountManager', assignedAM);
 router.use('/assignedSystemsEngineer', assignedSE);
 router.use('/case_status', caseStatus);
+
+//stats
+router.use('/totalCases', totalCases);
 
 module.exports = router;
