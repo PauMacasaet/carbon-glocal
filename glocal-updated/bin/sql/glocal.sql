@@ -24,8 +24,19 @@ CREATE TABLE products(
 );
 
 CREATE TABLE license(
-	product varchar(50) references products(productName) NOT NULL,
-	license varchar(200) NOT NULL
+	date_start date NOT NULL,
+	date_end date NOT NULL,
+	vendor varchar(50) references vendor(principal) ON UPDATE CASCADE NOT NULL,
+	productName varchar(50) references products(productName) ON UPDATE CASCADE NOT NULL,
+	client varchar(50) references client(accountName) ON UPDATE CASCADE NOT NULL,
+	particulars varchar(200) NOT NULL,
+	on_site varchar(50),
+	support_date_start date NOT NULL,
+	support_date_end date NOT NULL,
+	man_days int NOT NULL,
+	remaining_man_days int NOT NULL,
+	quarterly_hc varchar(50) NOT NULL,
+	remarks varchar(200) 
 );
 
 CREATE TABLE contact_person(
@@ -89,10 +100,10 @@ VALUES
 ('Multi-Cloud','Veritas'),
 ('Secure Web Gateway','Symmantec');
 
-INSERT INTO license(product, license)
+INSERT INTO license(date_start, date_end, vendor, productName, client, particulars,on_site, support_date_start, support_date_end, man_days, remaining_man_days, quarterly_hc, remarks)
 VALUES
-('Multi-Cloud','1yr warranty'),
-('Secure Web Gateway','3 yrs warranty');
+('05/01/2018','05/01/2019','Symmantec','Multi-Cloud','BPI','particular 1','8x5','06/05/2018','06/15/2018','13','12','8x5','remarks'),
+('11/28/2018','05/01/2019','Veritas','Secure Web Gateway','Unionbank','particular 2','24x7','12/05/2018','12/15/2018','13','12','24x7','remarks');
 
 INSERT INTO contact_person(client, personName)
 VALUES
