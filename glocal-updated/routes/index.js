@@ -50,6 +50,7 @@ const seLead = require('./casemonitoring/systemsEngineerLead');
 const assignedAM = require('./casemonitoring/assignedAccountManager');
 const assignedSE = require('./casemonitoring/assignedSystemsEngineer');
 const caseStatus = require('./casemonitoring/case_status');
+const nextId = require('./casemonitoring/nextid');
 
 //stats
 const totalCases = require('./stats/totalCases');
@@ -106,7 +107,7 @@ router.use('/systemsEngineerLead', seLead);
 router.use('/assignedAccountManager', assignedAM);
 router.use('/assignedSystemsEngineer', assignedSE);
 router.use('/case_status', caseStatus);
-
+router.use('/nextid', nextId);
 //stats
 router.use('/totalCases', totalCases);
 

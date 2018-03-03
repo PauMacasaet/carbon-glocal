@@ -121,8 +121,8 @@ VALUES
 
 INSERT INTO activities(trackingNo, timeIn, timeOuts, productName, client,  contactCustomer, addres, typeOfActivity, purposeOfVisit, activityPerformed, nextActivity, recommendations, engid, engineerName)
 VALUES
-(2018001,'2018-01-08 12:24:00', '2018-01-08 15:05:00', 'Multi-Cloud','Unionbank','John Karlo Tabios','unionbank','OnSite','troubleshoot','checked if modules are up to date','install updates', 'no recommendations',001,'John Jenkins'),
-(2018002, '2018-03-08 13:32:00','2018-03-08 16:22:00', 'Secure Web Gateway','BPI', 'John Vincent Agbayani', 'BPI','Remote','troubleshooting','check version of software','install updates',' no recommendations',002,'Isaiah Solomon');
+(001,'2018-01-08 12:24:00', '2018-01-08 15:05:00', 'Multi-Cloud','Unionbank','John Karlo Tabios','unionbank','OnSite','troubleshoot','checked if modules are up to date','install updates', 'no recommendations',001,'John Jenkins'),
+(001, '2018-03-08 13:32:00','2018-03-08 16:22:00', 'Secure Web Gateway','BPI', 'John Vincent Agbayani', 'BPI','Remote','troubleshooting','check version of software','install updates',' no recommendations',002,'Isaiah Solomon');
 
 
 
