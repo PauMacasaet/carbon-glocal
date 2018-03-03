@@ -15,13 +15,13 @@ const productvendor = require('./products/productvendor');
 //client table
 const accountName = require('./client/accountname');
 
-
 //contact person
 const contactPerson = require('./contact person/contactp');
 const contactClient = require('./contact person/contactc');
 
 //license
 const license = require('./license/license');
+const clientLicense = require('./license/vendor');
 
 //activities
 const timeIn = require('./activities/timeIn');
@@ -74,6 +74,7 @@ router.use('/contactc', contactClient);
 
 //license route
 router.use('/license', license);
+router.use('/clientlicense', clientLicense);
 
 //activities
 router.use('/timeIn', timeIn);
@@ -86,7 +87,7 @@ router.use('/activityPerformed', performed);
 router.use('/nextActivity', nextActivity);
 router.use('/recommendations', recommendations);
 router.use('/engineername', engineername);
-router.use('/engid', engid); 
+router.use('/engid', engid);
 router.use('/trackingno', trackingNo); //create and update
 
 //case monitoring
