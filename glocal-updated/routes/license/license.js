@@ -26,11 +26,11 @@ router3.post('/', (request, response, next) => {
     const { date_start, date_end, vendor, productName, client, particulars, on_site, support_date_start, support_date_end, man_days, remaining_man_days, quarterly_hc, remarks } = request.body;
 
     pool.query(
-        'INSERT INTO engineer( date_start, date_end, vendor, productName, client, particulars, on_site, support_date_start, support_date_end, man_days, remaining_man_days, quarterly_hc, remarks) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)', [date_start, date_end, vendor, productName, client, particulars, on_site, support_date_start, support_date_end, man_days, remaining_man_days, quarterly_hc, remarks],
+        'INSERT INTO license( date_start, date_end, vendor, productName, client, particulars, on_site, support_date_start, support_date_end, man_days, remaining_man_days, quarterly_hc, remarks) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)', [date_start, date_end, vendor, productName, client, particulars, on_site, support_date_start, support_date_end, man_days, remaining_man_days, quarterly_hc, remarks],
         (err, res) => {
             if (err) return next(err);
 
-            console.log('engineer created');
+            console.log('license created');
             response.redirect('/license');
         }
     );
