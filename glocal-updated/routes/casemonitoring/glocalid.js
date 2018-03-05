@@ -22,6 +22,66 @@ router8.get('/:glocalId', (request, response, next) => {
     });
 });
 
+router8.get('/customer/:customer', (request, response, next) => {
+    const { customer } = request.params
+    pool.query('SELECT customer, case_status, assignedSystemsEngineer, severity, caseTitle, productName, dateRaised FROM case_monitoring WHERE customer = ($1)', [customer], (err, res) => {
+        if (err) return next(err);
+
+        console.log('RETRIEVING LIST BY CUSTOMER');
+        response.json(res.rows);
+    });
+});
+
+router8.get('/case_status/:case_status', (request, response, next) => {
+    const { case_status } = request.params
+    pool.query('SELECT customer, case_status, assignedSystemsEngineer, severity, caseTitle, productName, dateRaised FROM case_monitoring WHERE case_status = ($1)', [case_status], (err, res) => {
+        if (err) return next(err);
+
+        console.log('RETRIEVING LIST BY CASE STATUS');
+        response.json(res.rows);
+    });
+});
+
+router8.get('/assignedSystemsEngineer/:assignedSystemsEngineer', (request, response, next) => {
+    const { assignedSystemsEngineer } = request.params
+    pool.query('SELECT customer, case_status, assignedSystemsEngineer, severity, caseTitle, productName, dateRaised FROM case_monitoring WHERE assignedSystemsEngineer = ARRAY[($1)]', [assignedSystemsEngineer], (err, res) => {
+        if (err) return next(err);
+
+        console.log('RETRIEVING LIST BY ASSIGNED SE');
+        response.json(res.rows);
+    });
+});
+
+router8.get('/severity/:severity', (request, response, next) => {
+    const { severity } = request.params
+    pool.query('SELECT customer, case_status, assignedSystemsEngineer, severity, caseTitle, productName, dateRaised FROM case_monitoring WHERE severity = ($1)', [severity], (err, res) => {
+        if (err) return next(err);
+
+        console.log('RETRIEVING LIST BY SEVERITY');
+        response.json(res.rows);
+    });
+});
+
+router8.get('/vendor/:vendor', (request, response, next) => {
+    const { vendor } = request.params
+    pool.query('SELECT customer, case_status, assignedSystemsEngineer, severity, caseTitle, productName, dateRaised FROM case_monitoring WHERE vendor = ($1)', [vendor], (err, res) => {
+        if (err) return next(err);
+
+        console.log('RETRIEVING LIST BY VENDOR');
+        response.json(res.rows);
+    });
+});
+
+router8.get('/productName/:productName', (request, response, next) => {
+    const { productName } = request.params
+    pool.query('SELECT customer, case_status, assignedSystemsEngineer, severity, caseTitle, productName, dateRaised FROM case_monitoring WHERE productName = ($1)', [productName], (err, res) => {
+        if (err) return next(err);
+
+        console.log('RETRIEVING LIST BY PRODUCT NAME');
+        response.json(res.rows);
+    });
+});
+
 router8.post('/', (request, response, next) => {
     const { vendorCaseId, dateIdCreated, dateRaised, caseTitle, caseDescription, severity, vendor, customer, productName, customerName, systemsEngineerLead, assignedAccountManager, assignedSystemsEngineer, case_status } = request.body;
 

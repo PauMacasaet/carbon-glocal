@@ -56,9 +56,6 @@ const nextId = require('./casemonitoring/nextid');
 //stats
 const totalCases = require('./stats/totalCases');
 
-//filters
-const filter = require('./filters/filter');
-
 const router = Router();
 
 //engineer routes
@@ -115,8 +112,5 @@ router.use('/case_status', caseStatus);
 router.use('/nextid', nextId);
 //stats
 router.use('/totalCases', totalCases);
-
-//filters
-router.use('/filter', filter);
 
 module.exports = router;
