@@ -53,8 +53,8 @@ router5.put('/:productName', (request, response, next) => {
                 if (err) return next(err);
 
                 console.log('UPDATING products record');
-                if (index === fields.length - 1) request.set = 'GET';
-                response.redirect('/products');
+                if (index === fields.length - 1)
+                    response.redirect('/products');
             }
         )
     });
@@ -68,8 +68,9 @@ router5.delete('/:productName', (request, response, next) => {
         (err, res) => {
             if (err) return next(err);
 
-            console.log('deleted record from products');
             request.method = 'GET';
+
+            console.log('deleted record from products');
             response.redirect('/products');
         }
     );
