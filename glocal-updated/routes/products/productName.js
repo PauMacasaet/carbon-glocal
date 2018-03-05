@@ -69,8 +69,10 @@ router5.delete('/:productName', (request, response, next) => {
             if (err) return next(err);
 
             console.log('deleted record from products');
+            request.method = 'GET'
             response.redirect('/products');
         }
     );
 });
+
 module.exports = router5;
