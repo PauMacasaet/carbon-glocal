@@ -22,6 +22,7 @@ const contactClient = require('./contact person/contactc');
 //license
 const license = require('./license/license');
 const clientLicense = require('./license/vendor');
+const on_site = require('./license/onsite');
 
 //activities
 const timeIn = require('./activities/timeIn');
@@ -79,6 +80,7 @@ router.use('/contactc', contactClient);
 //license route
 router.use('/license', license);
 router.use('/clientlicense', clientLicense);
+router.use('/onsite', on_site);
 
 //activities
 router.use('/timeIn', timeIn);
