@@ -113,7 +113,7 @@ INSERT INTO case_monitoring(vendorCaseId, dateIdCreated, dateRaised, caseTitle, 
 VALUES
 ('JF1','01/08/2018','01/07/2018','Attend to failure of backup','troubleshoot',1,'Veritas','Unionbank','Multi-Cloud','John Karlo Tabios','Jefferson','Mei',ARRAY[['John Jenkins'],['Isaiah Solomon']], 'Ongoing'),
 ('JF2','03/08/2018','03/07/2018','Fix server for backup','install updates',1,'Symmantec','BPI','Secure Web Gateway','John Vincent Agbayani','Jeffrey','Maan',ARRAY['Aaron Hernandez'], 'Resolved'),
-('JF3','04/04/2018', '04/01/2018', 'Error 404', 'fix error', 2, 'Veritas', 'BPI', 'Secure Web Gateway', 'John Karlo Tabios', 'Jefferson', 'Mei', ARRAY[['Aaron Hernandez']], 'Ongoing'),
+('JF3','04/04/2018', '04/01/2018', 'Error 404', 'fix error', 2, 'Veritas', 'BPI', 'Secure Web Gateway', 'John Karlo Tabios', 'Jefferson', 'Mei', ARRAY['Aaron Hernandez'], 'Ongoing'),
 ('JF4', '04/07/2018', '04/06/2018', 'Fix server for backup', 'install updates', 2, 'Symmantec', 'Unionbank', 'Multi-Cloud', 'Henry Gonzales', 'Oliver', 'Maan', ARRAY['Isaiah Solomon'], 'Pending (Glo-cal)'),
 ('JF5', '05/11/2018', '05/09/2018', 'Attend to failure of backup', 'troubleshoot', 2, 'Veritas', 'BPI', 'Secure Web Gateway', 'FJ Camilo', 'Jeffrey', 'Mei', ARRAY[['John Jenkins'], ['Aaron Hernandez']], 'Pending (Client)'),
 ('JF6', '05/11/2018', '05/09/2018', 'Attend to failure of backup', 'troubleshoot', 2, 'Veritas', 'BPI', 'Secure Web Gateway', 'FJ Camilo', 'Jeffrey', 'Mei', ARRAY[['John Jenkins'], ['Aaron Hernandez']], 'Pending (Client)');
