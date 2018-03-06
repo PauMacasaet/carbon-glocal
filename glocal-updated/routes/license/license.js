@@ -31,7 +31,6 @@ router3.post('/', (request, response, next) => {
             if (err) return next(err);
 
             console.log('license created');
-            response.redirect('/license');
         }
     );
 });
@@ -52,9 +51,9 @@ router3.put('/:productName', (request, response, next) => {
             (err, res) => {
                 if (err) return next(err);
 
-                console.log('UPDATING license record');
 
-                if (index === fields.length - 1) response.redirect('/license');
+                if (index === fields.length - 1)
+                    console.log('UPDATING license record');
             }
         )
     });
@@ -68,7 +67,6 @@ router3.delete('/:productName', (request, response, next) => {
         (err, res) => {
             if (err) return next(err);
 
-            response.redirect('/license');
         }
     );
 });

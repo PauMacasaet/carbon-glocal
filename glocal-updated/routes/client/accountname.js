@@ -31,7 +31,6 @@ router11.post('/', (request, response, next) => {
             if (err) return next(err);
 
             console.log('NEW client CREATED');
-            response.redirect('/client');
         }
     );
 });
@@ -52,9 +51,10 @@ router11.put('/:accountName', (request, response, next) => {
             (err, res) => {
                 if (err) return next(err);
 
-                console.log('UPDATED client record');
 
-                if (index === fields.length - 1) response.redirect('/client');
+                if (index === fields.length - 1)
+                    console.log('UPDATED client record');
+
             }
         )
     });
@@ -69,7 +69,6 @@ router11.delete('/:client', (request, response, next) => {
             if (err) return next(err);
 
             console.log('deleted record from client');
-            response.redirect('/client');
         }
     );
 });

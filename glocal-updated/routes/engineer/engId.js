@@ -31,7 +31,6 @@ router.post('/', (request, response, next) => {
             if (err) return next(err);
 
             console.log('engineer created');
-            response.redirect('/engineer');
         }
     );
 });
@@ -52,9 +51,10 @@ router.put('/:engId', (request, response, next) => {
             (err, res) => {
                 if (err) return next(err);
 
-                console.log('UPDATING engineer record');
 
-                if (index === fields.length - 1) response.redirect('/engineer');
+                if (index === fields.length - 1)
+                    console.log('UPDATING engineer record');
+
             }
         )
     });
@@ -68,7 +68,6 @@ router.delete('/:engId', (request, response, next) => {
         (err, res) => {
             if (err) return next(err);
 
-            response.redirect('/engineer');
         }
     );
 });

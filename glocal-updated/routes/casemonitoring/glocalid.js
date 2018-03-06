@@ -91,7 +91,6 @@ router8.post('/', (request, response, next) => {
             if (err) return next(err);
 
             console.log('new case created');
-            response.redirect('/glocalid');
         }
     );
 });
@@ -112,9 +111,9 @@ router8.put('/:glocalId', (request, response, next) => {
             (err, res) => {
                 if (err) return next(err);
 
-                console.log('UPDATED client record');
 
-                if (index === fields.length - 1) response.redirect('/glocalid');
+                if (index === fields.length - 1)
+                    console.log('UPDATED client record');
             }
         )
     });
@@ -129,7 +128,6 @@ router8.delete('/:glocalId', (request, response, next) => {
             if (err) return next(err);
 
             console.log('deleted record from case monitoring');
-            response.redirect('/glocalid');
         }
     );
 });

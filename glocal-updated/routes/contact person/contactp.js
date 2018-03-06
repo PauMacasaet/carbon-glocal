@@ -31,7 +31,6 @@ router11.post('/', (request, response, next) => {
             if (err) return next(err);
 
             console.log('NEW contact person created CREATED');
-            response.redirect('/contactp');
         }
     );
 });
@@ -52,9 +51,9 @@ router11.put('/:contactPerson', (request, response, next) => {
             (err, res) => {
                 if (err) return next(err);
 
-                console.log('UPDATED contact person record');
 
-                if (index === fields.length - 1) response.redirect('/contactp');
+                if (index === fields.length - 1)
+                    console.log('UPDATED contact person record');
             }
         )
     });
@@ -69,7 +68,6 @@ router11.delete('/:contactPerson', (request, response, next) => {
             if (err) return next(err);
 
             console.log('deleted record from client');
-            response.redirect('/contactp');
         }
     );
 });

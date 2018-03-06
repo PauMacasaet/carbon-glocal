@@ -31,7 +31,6 @@ router3.post('/', (request, response, next) => {
             if (err) return next(err);
 
             console.log('activity created');
-            response.redirect('/trackingno'); //yung route mismo
         }
     );
 });
@@ -52,9 +51,9 @@ router3.put('/:trackingNo', (request, response, next) => {
             (err, res) => {
                 if (err) return next(err);
 
-                console.log('UPDATING activity record');
 
-                if (index === fields.length - 1) response.redirect('/trackingNo');
+                if (index === fields.length - 1)
+                    console.log('UPDATING activity record');
             }
         )
     });
@@ -68,7 +67,6 @@ router3.delete('/:trackingNo', (request, response, next) => {
         (err, res) => {
             if (err) return next(err);
 
-            response.redirect('/trackingNo');
         }
     );
 });
