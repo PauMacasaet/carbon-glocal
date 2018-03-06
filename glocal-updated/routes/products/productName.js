@@ -31,7 +31,6 @@ router5.post('/', (request, response, next) => {
             if (err) return next(err);
 
             console.log('products created');
-            response.redirect('/productvendor');
         }
     );
 });
@@ -52,9 +51,9 @@ router5.put('/:productName', (request, response, next) => {
             (err, res) => {
                 if (err) return next(err);
 
-                console.log('UPDATING products record');
                 if (index === fields.length - 1)
-                    response.redirect('/productvendor');
+                    console.log('UPDATING products record');
+
             }
         )
     });
@@ -71,7 +70,6 @@ router5.delete('/:productName', (request, response, next) => {
             request.method = 'GET';
 
             console.log('deleted record from products');
-            response.redirect('/productvendor');
         }
     );
 });

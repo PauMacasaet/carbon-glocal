@@ -31,7 +31,6 @@ router4.post('/', (request, response, next) => {
             if (err) return next(err);
 
             console.log('vendor created');
-            response.redirect('/vendor');
         }
     );
 });
@@ -52,9 +51,10 @@ router4.put('/:principal', (request, response, next) => {
             (err, res) => {
                 if (err) return next(err);
 
-                console.log('UPDATING vendor record');
 
-                if (index === fields.length - 1) response.redirect('/vendor');
+                if (index === fields.length - 1)
+                    console.log('UPDATING vendor record');
+
             }
         )
     });
@@ -69,7 +69,6 @@ router4.delete('/:principal', (request, response, next) => {
             if (err) return next(err);
 
             console.log('Deleting Record from Vendor table');
-            response.redirect('/vendor');
         }
     );
 });
