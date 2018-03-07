@@ -30,7 +30,9 @@ router3.post('/', (request, response, next) => {
         (err, res) => {
             if (err) return next(err);
 
-            console.log('activity created');
+            response.json({
+                "create activity": "activity created"
+            });
         }
     );
 });
@@ -53,7 +55,9 @@ router3.put('/:trackingNo', (request, response, next) => {
 
 
                 if (index === fields.length - 1)
-                    console.log('UPDATING activity record');
+                    response.json({
+                        "update activity": "activity updated"
+                    });
             }
         )
     });
@@ -66,7 +70,9 @@ router3.delete('/:trackingNo', (request, response, next) => {
         'DELETE FROM activities WHERE trackingNo = ($1)', [trackingNo],
         (err, res) => {
             if (err) return next(err);
-
+            response.json({
+                "delete activity": "activity deleted"
+            });
         }
     );
 });

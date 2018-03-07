@@ -30,7 +30,9 @@ router.post('/', (request, response, next) => {
         (err, res) => {
             if (err) return next(err);
 
-            console.log('engineer created');
+            response.json({
+                "create engineer": "engineer deleted"
+            });
         }
     );
 });
@@ -53,8 +55,9 @@ router.put('/:engId', (request, response, next) => {
 
 
                 if (index === fields.length - 1)
-                    console.log('UPDATING engineer record');
-
+                    response.json({
+                        "update engineer": "engineer record updated"
+                    });
             }
         )
     });
@@ -68,6 +71,9 @@ router.delete('/:engId', (request, response, next) => {
         (err, res) => {
             if (err) return next(err);
 
+            response.json({
+                "delete engineer": "engineer deleted"
+            });
         }
     );
 });
