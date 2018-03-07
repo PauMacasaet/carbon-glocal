@@ -82,6 +82,15 @@ router8.get('/productName/:productName', (request, response, next) => {
     });
 });
 
+router8.get('/dateRaised/:dateRaised', (request, response, next) => {
+    const { dateRaised } = request.params
+    pool.query('SELECT customer, case_status, assignedSystemsEngineer, severity, caseTitle, productName, dateRaised FROM case_monitoring WHERE EXTRACT(month from dateRaised)=($1)', [dateRaised], (err, res) => {
+        if (err) return next(err);
+        console.log('RETRIEVING LIST BY DATE RAISED');
+        response.json(res.rows);
+    });
+});
+
 router8.post('/', (request, response, next) => {
     const { vendorCaseId, dateIdCreated, dateRaised, caseTitle, caseDescription, severity, vendor, customer, productName, customerName, systemsEngineerLead, assignedAccountManager, assignedSystemsEngineer, case_status } = request.body;
 
