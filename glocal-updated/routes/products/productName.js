@@ -30,8 +30,9 @@ router5.post('/', (request, response, next) => {
         (err, res) => {
             if (err) return next(err);
 
-            console.log('products created');
-            req.flash('success_msg', 'Product Created!');
+            response.json({
+                "create product": "product created"
+            });
         }
     );
 });
@@ -53,8 +54,9 @@ router5.put('/:productName', (request, response, next) => {
                 if (err) return next(err);
 
                 if (index === fields.length - 1)
-                    console.log('UPDATING products record');
-
+                    response.json({
+                        "update product": "product updated"
+                    });
             }
         )
     });
@@ -68,9 +70,10 @@ router5.delete('/:productName', (request, response, next) => {
         (err, res) => {
             if (err) return next(err);
 
-            request.method = 'GET';
 
-            console.log('deleted record from products');
+            response.json({
+                "delete product": "product deleted"
+            });
         }
     );
 });

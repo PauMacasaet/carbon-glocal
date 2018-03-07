@@ -14,7 +14,6 @@ app.use('/', routes)
 
 app.use((err, req, res, next) => {
     res.json(err);
-    res.locals.success_msg = req.flash('success_msg');
 });
 
 module.exports = app;
