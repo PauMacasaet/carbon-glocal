@@ -91,6 +91,7 @@ router8.post('/', (request, response, next) => {
             if (err) return next(err);
 
             console.log('new case created');
+            response.json(res.rows);
         }
     );
 });

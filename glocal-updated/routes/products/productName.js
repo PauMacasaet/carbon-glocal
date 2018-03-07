@@ -31,6 +31,7 @@ router5.post('/', (request, response, next) => {
             if (err) return next(err);
 
             console.log('products created');
+            req.flash('success_msg', 'Product Created!');
         }
     );
 });
