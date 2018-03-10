@@ -3,14 +3,23 @@ const pool = require('../../db');
 
 const router8 = Router();
 
-router8.get('/', (request, response, next) => {
-    pool.query('SELECT * from case_monitoring', (err, res) => {
-        if (err) return next(err);
 
-        console.log('RETRIEVING ALL RECORDS FROM case monitoring TABLE');
+router8.get('/', (request, response, next)=> {
+    pool.query('SELECT glocalId, customer, productName, caseTitle, caseDescription, severity FROM case_monitoring',(err,res) =>{
+        if(err) return next (err);
+
+        console.log('SHOWING ALL CASES');
         response.json(res.rows);
     });
 });
+
+router8.get('/search', (request, response, next) => {
+  
+
+        console.log(request.query);
+        response.json(request.query);
+    });
+
 
 router8.get('/:glocalId', (request, response, next) => {
     const { glocalId } = request.params
@@ -23,11 +32,10 @@ router8.get('/:glocalId', (request, response, next) => {
 });
 
 router8.get('/customer/:customer', (request, response, next) => {
-    const { customer } = request.params
     pool.query('SELECT customer, case_status, assignedSystemsEngineer, severity, caseTitle, productName, dateRaised FROM case_monitoring WHERE customer = ($1)', [customer], (err, res) => {
         if (err) return next(err);
 
-        console.log('RETRIEVING LIST BY CUSTOMER');
+        console.log(request.query);
         response.json(res.rows);
     });
 });
