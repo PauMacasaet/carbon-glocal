@@ -63,6 +63,7 @@ CREATE TABLE case_monitoring(
 
 CREATE TABLE activities(
 	trackingNo serial references case_monitoring(glocalId) ON DELETE CASCADE NOT NULL,
+	activityNo serial NOT NULL,
 	timeIn timestamp NOT NULL, 
 	timeOuts timestamp NOT NULL,
 	productName varchar(50) references products(productName) ON DELETE CASCADE NOT NULL,
