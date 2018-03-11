@@ -45,7 +45,7 @@ router8.get('/case_status/:case_status', (request, response, next) => {
     pool.query('SELECT customer, case_status, assignedSystemsEngineer, severity, caseTitle, productName, dateRaised FROM case_monitoring WHERE case_status = ($1)', [case_status], (err, res) => {
         if (err) return next(err);
 
-        console.log('RETRIEVING LIST BY CASE STATUS');
+        console.log(request.query);
         response.json(res.rows);
     });
 });
@@ -55,7 +55,7 @@ router8.get('/assignedSystemsEngineer/:assignedSystemsEngineer', (request, respo
     pool.query('SELECT customer, case_status, assignedSystemsEngineer, severity, caseTitle, productName, dateRaised FROM case_monitoring WHERE assignedSystemsEngineer = ARRAY[($1)]', [assignedSystemsEngineer], (err, res) => {
         if (err) return next(err);
 
-        console.log('RETRIEVING LIST BY ASSIGNED SE');
+        console.log(request.query);
         response.json(res.rows);
     });
 });
@@ -64,8 +64,7 @@ router8.get('/severity/:severity', (request, response, next) => {
     const { severity } = request.params
     pool.query('SELECT customer, case_status, assignedSystemsEngineer, severity, caseTitle, productName, dateRaised FROM case_monitoring WHERE severity = ($1)', [severity], (err, res) => {
         if (err) return next(err);
-
-        console.log('RETRIEVING LIST BY SEVERITY');
+        console.log(request.query);
         response.json(res.rows);
     });
 });
@@ -74,8 +73,7 @@ router8.get('/vendor/:vendor', (request, response, next) => {
     const { vendor } = request.params
     pool.query('SELECT customer, case_status, assignedSystemsEngineer, severity, caseTitle, productName, dateRaised FROM case_monitoring WHERE vendor = ($1)', [vendor], (err, res) => {
         if (err) return next(err);
-
-        console.log('RETRIEVING LIST BY VENDOR');
+        console.log(request.query);
         response.json(res.rows);
     });
 });
@@ -84,8 +82,7 @@ router8.get('/productName/:productName', (request, response, next) => {
     const { productName } = request.params
     pool.query('SELECT customer, case_status, assignedSystemsEngineer, severity, caseTitle, productName, dateRaised FROM case_monitoring WHERE productName = ($1)', [productName], (err, res) => {
         if (err) return next(err);
-
-        console.log('RETRIEVING LIST BY PRODUCT NAME');
+        console.log(request.query);
         response.json(res.rows);
     });
 });
@@ -94,7 +91,7 @@ router8.get('/dateRaised/:dateRaised', (request, response, next) => {
     const { dateRaised } = request.params
     pool.query('SELECT customer, case_status, assignedSystemsEngineer, severity, caseTitle, productName, dateRaised FROM case_monitoring WHERE EXTRACT(month from dateRaised)=($1)', [dateRaised], (err, res) => {
         if (err) return next(err);
-        console.log('RETRIEVING LIST BY DATE RAISED');
+        console.log(request.query);
         response.json(res.rows);
     });
 });
