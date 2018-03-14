@@ -14,7 +14,7 @@ router3.get('/', (request, response, next) => {
 
 router3.get('/:trackingNo', (request, response, next) => {
     const { trackingNo } = request.params
-    pool.query('SELECT engid, productName, typeOfActivity, purposeOfVisit, activityPerformed, nextActivity, recommendations, engineerName as engineerSurname FROM activities WHERE trackingNo= ($1)', [trackingNo], (err, res) => {
+    pool.query('SELECT engid, productName, typeOfActivity, purposeOfVisit, activityPerformed, nextActivity, recommendations, timeIn, timeOuts, engineerName as engineerSurname FROM activities WHERE trackingNo= ($1)', [trackingNo], (err, res) => {
         if (err) return next(err);
 
         console.log('RETRIEVING LIST from activities bY engid');
