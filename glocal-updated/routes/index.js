@@ -4,6 +4,7 @@ const { Router } = require('express');
 const engId = require('./engineer/engId');
 const name = require('./engineer/name');
 const department = require('./engineer/department');
+const isLead = require('./engineer/isLead');
 
 //vendor table
 const principal = require('./vendor/vendor');
@@ -63,6 +64,7 @@ const router = Router();
 router.use('/engineer', engId); //create and update
 router.use('/name', name);
 router.use('/department', department);
+router.use('/isLead', isLead);
 
 //vendor routes
 router.use('/vendor', principal); //create and update

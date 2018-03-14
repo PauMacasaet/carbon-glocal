@@ -2,7 +2,8 @@ CREATE TABLE engineer(
 	engId int  unique PRIMARY KEY NOT NULL,
 	department varchar(50) NOT NULL,
 	firstName varchar(50) NOT NULL,
-	lastName varchar(50) NOT NULL
+	lastName varchar(50) NOT NULL,
+	isLead boolean NOT NULL
 );
 
 CREATE TABLE vendor(
@@ -10,7 +11,7 @@ CREATE TABLE vendor(
 );
 
 CREATE TABLE client(
-	accountName varchar(50) PRIMARY KEY NOT NULL,
+	accountName varchar(50) unique PRIMARY KEY NOT NULL,
 	contact_details text[][] NOT NULL,
 	company_address varchar(100) NOT NULL,
 	systemEngineerLead varchar(50),
@@ -80,11 +81,12 @@ CREATE TABLE activities(
 	engineerName varchar(50)
 );
 
-INSERT INTO engineer(engId, department, firstName, lastName)
+INSERT INTO engineer(engId, department, firstName, lastName, isLead)
 VALUES 
-(001,'Security','John','Jenkins'),
-(002,'Availability','Isaiah','Solomon'),
-(003, 'Security','Aaron','Hernandez');
+(001,'Security','John','Jenkins', FALSE),
+(002,'Availability','Isaiah','Solomon', FALSE),
+(003, 'Security','Aaron','Hernandez', FALSE),
+(004, 'Availability', 'Richard', 'Cruz', TRUE);
 
 INSERT INTO vendor(principal)
 VALUES

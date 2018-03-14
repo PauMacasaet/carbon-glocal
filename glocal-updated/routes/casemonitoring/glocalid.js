@@ -29,6 +29,7 @@ router8.get('/:glocalId', (request, response, next) => {
 });
 
 router8.get('/customer/:customer', (request, response, next) => {
+    const { customer } = request.params
     pool.query('SELECT customer, case_status, assignedSystemsEngineer, severity, caseTitle, productName, dateRaised FROM case_monitoring WHERE customer = ($1)', [customer], (err, res) => {
         if (err) return next(err);
 
