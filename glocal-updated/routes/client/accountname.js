@@ -49,7 +49,7 @@ router11.put('/:accountName', (request, response, next) => {
     //partial updating
     fields.forEach((field, index) => {
         pool.query(
-            `UPDATE client SET ${field} = ($1) WHERE accountName =($2)`, [request.body[field], client],
+            `UPDATE client SET ${field} = ($1) WHERE accountName =($2)`, [request.body[field], accountName],
             (err, res) => {
                 if (err) return next(err);
 

@@ -19,15 +19,16 @@ CREATE TABLE client(
 
 CREATE TABLE products(
 	productName varchar(50) unique PRIMARY KEY NOT NULL,
-	vendor varchar(50) references vendor(principal) ON DELETE CASCADE NOT NULL
+	vendor varchar(50) references vendor(principal) ON UPDATE CASCADE NOT NULL
 );
 
 CREATE TABLE license(
+	licenseId serial, 
 	date_start date NOT NULL,
 	date_end date NOT NULL,
-	vendor varchar(50) references vendor(principal) ON DELETE CASCADE NOT NULL,
-	productName varchar(50) references products(productName) ON DELETE CASCADE NOT NULL,
-	client varchar(50) references client(accountName) ON DELETE CASCADE NOT NULL,
+	vendor varchar(50) references vendor(principal) ON UPDATE CASCADE NOT NULL,
+	productName varchar(50) references products(productName) ON UPDATE CASCADE NOT NULL,
+	client varchar(50) references client(accountName) ON UPDATE CASCADE NOT NULL,
 	particulars varchar(200) NOT NULL,
 	on_site varchar(50),
 	support_date_start date NOT NULL,
@@ -39,7 +40,7 @@ CREATE TABLE license(
 );
 
 CREATE TABLE contact_person(
-	client varchar(50) references client(accountName) NOT NULL,
+	client varchar(50) references client(accountName) ON UPDATE CASCADE NOT NULL,
 	personName varchar(50) unique NOT NULL
 );
 
@@ -52,8 +53,8 @@ CREATE TABLE case_monitoring(
 	caseDescription varchar(100) NOT NULL,
 	severity int NOT NULL,
 	vendor varchar(50) NOT NULL,
-	customer varchar(50) references client(accountName) NOT NULL,
-	productName varchar(50) references products(productName) ON DELETE CASCADE NOT NULL,
+	customer varchar(50) references client(accountName) ON UPDATE CASCADE NOT NULL,
+	productName varchar(50) references products(productName) ON UPDATE CASCADE NOT NULL,
 	customerName varchar(50) NOT NULL,
 	systemsEngineerLead varchar(50),
 	assignedAccountManager varchar(50),
@@ -62,11 +63,11 @@ CREATE TABLE case_monitoring(
 );
 
 CREATE TABLE activities(
-	trackingNo serial references case_monitoring(glocalId) ON DELETE CASCADE NOT NULL,
-	activityNo serial NOT NULL,
+	trackingNo serial references case_monitoring(glocalId) ON UPDATE CASCADE NOT NULL,
+	activityNo serial,
 	timeIn timestamp NOT NULL, 
 	timeOuts timestamp NOT NULL,
-	productName varchar(50) references products(productName) ON DELETE CASCADE NOT NULL,
+	productName varchar(50) references products(productName) ON UPDATE CASCADE NOT NULL,
 	client varchar(50) NOT NULL,
 	contactCustomer varchar(50) references contact_person(personName) NOT NULL,
 	addres varchar(50) NOT NULL, 

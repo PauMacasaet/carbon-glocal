@@ -3,10 +3,9 @@ const pool = require('../../db');
 
 const router8 = Router();
 
-
-router8.get('/', (request, response, next)=> {
-    pool.query('SELECT glocalId, customer, productName, caseTitle, caseDescription, severity FROM case_monitoring',(err,res) =>{
-        if(err) return next (err);
+router8.get('/', (request, response, next) => {
+    pool.query('SELECT glocalId, vendorCaseId, dateIdCreated, assignedAccountManager, assignedSystemsEngineer, case_status, caseDescription, caseTitle, customer, customerName, dateRaised, glocalId, productName, severity, systemsEngineerLead, vendor FROM case_monitoring', (err, res) => {
+        if (err) return next(err);
 
         console.log('SHOWING ALL CASES');
         response.json(res.rows);
@@ -14,12 +13,10 @@ router8.get('/', (request, response, next)=> {
 });
 
 router8.get('/search', (request, response, next) => {
-  
 
-        console.log(request.query);
-        response.json(request.query);
-    });
-
+    console.log(request.query);
+    response.json(request.query);
+});
 
 router8.get('/:glocalId', (request, response, next) => {
     const { glocalId } = request.params
