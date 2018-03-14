@@ -23,10 +23,10 @@ router.get('/:engId', (request, response, next) => {
 });
 
 router.post('/', (request, response, next) => {
-    const { engId, department, firstName, lastName } = request.body;
+    const { engId, department, firstName, lastName, isLead } = request.body;
 
     pool.query(
-        'INSERT INTO engineer( engId, department, firstName, lastName) VALUES($1, $2, $3, $4)', [engId, department, firstName, lastName],
+        'INSERT INTO engineer( engId, department, firstName, lastName, isLead) VALUES($1, $2, $3, $4, $5)', [engId, department, firstName, lastName, isLead],
         (err, res) => {
             if (err) return next(err);
 
@@ -39,7 +39,7 @@ router.post('/', (request, response, next) => {
 
 router.put('/:engId', (request, response, next) => {
     const { engId } = request.params;
-    const keys = ['engId', 'department', 'firstName', 'lastName'];
+    const keys = ['engId', 'department', 'firstName', 'lastName', 'isLead'];
     const fields = [];
 
     keys.forEach(key => {
