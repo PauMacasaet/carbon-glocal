@@ -35,7 +35,7 @@ CREATE TABLE license(
 	support_date_end date NOT NULL,
 	man_days int NOT NULL,
 	remaining_man_days int NOT NULL,
-	quarterly_hc varchar(50) NOT NULL,
+	quarterly_hc boolean NOT NULL,
 	remarks varchar(200) 
 );
 
@@ -103,8 +103,8 @@ VALUES
 
 INSERT INTO license(date_start, date_end, vendor, productName, client, particulars,on_site, support_date_start, support_date_end, man_days, remaining_man_days, quarterly_hc, remarks)
 VALUES
-('05/01/2018','05/01/2019','Symmantec','Multi-Cloud','BPI','particular 1','8x5','06/05/2018','06/15/2018','13','12','8x5','remarks'),
-('11/28/2018','05/01/2019','Veritas','Secure Web Gateway','Unionbank','particular 2','24x7','12/05/2018','12/15/2018','13','12','24x7','remarks');
+('05/01/2018','05/01/2019','Symmantec','Multi-Cloud','BPI','particular 1','8x5','06/05/2018','06/15/2018',13,12,TRUE,'remarks'),
+('11/28/2018','05/01/2019','Veritas','Secure Web Gateway','Unionbank','particular 2','24x7','12/05/2018','12/15/2018',13,12,TRUE,'remarks');
 
 INSERT INTO contact_person(client, personName)
 VALUES
