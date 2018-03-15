@@ -14,7 +14,6 @@ CREATE TABLE client(
 	accountName varchar(50) unique PRIMARY KEY NOT NULL,
 	contact_details text[][] NOT NULL,
 	company_address varchar(100) NOT NULL,
-	systemEngineerLead varchar(50),
 	accountManager varchar(50) NOT NULL
 );
 
@@ -56,10 +55,9 @@ CREATE TABLE case_monitoring(
 	vendor varchar(50) NOT NULL,
 	customer varchar(50) references client(accountName) ON UPDATE CASCADE NOT NULL,
 	productName varchar(50) references products(productName) ON UPDATE CASCADE NOT NULL,
-	customerName varchar(50) NOT NULL,
 	systemsEngineerLead varchar(50),
 	assignedAccountManager varchar(50),
-	assignedSystemsEngineer text[][] NOT NULL,
+	leads varchar(50) NOT NULL,
 	case_status varchar(50) NOT NULL
 );
 
@@ -93,10 +91,10 @@ VALUES
 ('Symmantec'),
 ('Veritas');
 
-INSERT INTO client(accountName, contact_details, company_address, systemEngineerLead, accountManager)
+INSERT INTO client(accountName, contact_details, company_address, accountManager)
 VALUES
-('Unionbank', ARRAY[['Mareeah Koochenera','marreah@gmail.com','09178456789']],'157 HV Dela Costa','Richard','Mei' ),
-('BPI', ARRAY[['Garrosh','garrosh@gmail.com','09176230789']],'15 Jupiter','Jonathan','Mara');
+('Unionbank', ARRAY[['Mareeah Koochenera','marreah@gmail.com','09178456789']],'157 HV Dela Costa','Mei' ),
+('BPI', ARRAY[['Garrosh','garrosh@gmail.com','09176230789']],'15 Jupiter','Mara');
 
 INSERT INTO products(productName, vendor)
 VALUES
@@ -113,14 +111,14 @@ VALUES
 ('BPI','John Vincent Agbayani'),
 ('Unionbank','John Karlo Tabios');
 
-INSERT INTO case_monitoring(vendorCaseId, dateIdCreated, dateRaised, caseTitle, caseDescription, severity, vendor, customer, productName, customerName, systemsEngineerLead, assignedAccountManager, assignedSystemsEngineer, case_status)
+INSERT INTO case_monitoring(vendorCaseId, dateIdCreated, dateRaised, caseTitle, caseDescription, severity, vendor, customer, productName, systemsEngineerLead, assignedAccountManager, leads, case_status)
 VALUES
-('JF1','01/08/2018','01/07/2018','Attend to failure of backup','troubleshoot',1,'Veritas','Unionbank','Multi-Cloud','John Karlo Tabios','Jefferson','Mei',ARRAY[['John Jenkins'],['Isaiah Solomon']], 'Ongoing'),
-('JF2','03/08/2018','03/07/2018','Fix server for backup','install updates',1,'Symmantec','BPI','Secure Web Gateway','John Vincent Agbayani','Jeffrey','Maan',ARRAY['Aaron Hernandez'], 'Resolved'),
-('JF3','04/04/2018', '04/01/2018', 'Error 404', 'fix error', 2, 'Veritas', 'BPI', 'Secure Web Gateway', 'John Karlo Tabios', 'Jefferson', 'Mei', ARRAY['Aaron Hernandez'], 'Ongoing'),
-('JF4', '04/07/2018', '04/06/2018', 'Fix server for backup', 'install updates', 2, 'Symmantec', 'Unionbank', 'Multi-Cloud', 'Henry Gonzales', 'Oliver', 'Maan', ARRAY['Isaiah Solomon'], 'Pending (Glo-cal)'),
-('JF5', '05/11/2018', '05/09/2018', 'Attend to failure of backup', 'troubleshoot', 2, 'Veritas', 'BPI', 'Secure Web Gateway', 'FJ Camilo', 'Jeffrey', 'Mei', ARRAY[['John Jenkins'], ['Aaron Hernandez']], 'Pending (Client)'),
-('JF6', '05/11/2018', '05/09/2018', 'Attend to failure of backup', 'troubleshoot', 2, 'Veritas', 'BPI', 'Secure Web Gateway', 'FJ Camilo', 'Jeffrey', 'Mei', ARRAY[['John Jenkins'], ['Aaron Hernandez']], 'Pending (Client)');
+('JF1','01/08/2018','01/07/2018','Attend to failure of backup','troubleshoot',1,'Veritas','Unionbank','Multi-Cloud','Jefferson','Mei','John Jenkins', 'Ongoing'),
+('JF2','03/08/2018','03/07/2018','Fix server for backup','install updates',1,'Symmantec','BPI','Secure Web Gateway','Jeffrey','Maan','Aaron Hernandez', 'Resolved'),
+('JF3','04/04/2018', '04/01/2018', 'Error 404', 'fix error', 2, 'Veritas', 'BPI', 'Secure Web Gateway', 'Jefferson', 'Mei', 'Aaron Hernandez', 'Ongoing'),
+('JF4', '04/07/2018', '04/06/2018', 'Fix server for backup', 'install updates', 2, 'Symmantec', 'Unionbank', 'Multi-Cloud', 'Oliver', 'Maan','Isaiah Solomon', 'Pending (Glo-cal)'),
+('JF5', '05/11/2018', '05/09/2018', 'Attend to failure of backup', 'troubleshoot', 2, 'Veritas', 'BPI', 'Secure Web Gateway', 'Jeffrey', 'Mei', 'Aaron Hernandez', 'Pending (Client)'),
+('JF6', '05/11/2018', '05/09/2018', 'Attend to failure of backup', 'troubleshoot', 2, 'Veritas', 'BPI', 'Secure Web Gateway', 'Jeffrey', 'Mei', 'John Jenkins', 'Pending (Client)');
 
 
 INSERT INTO activities(trackingNo, timeIn, timeOuts, productName, client,  contactCustomer, addres, typeOfActivity, purposeOfVisit, activityPerformed, nextActivity, recommendations, engid, engineerName)

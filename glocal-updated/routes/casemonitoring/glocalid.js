@@ -4,7 +4,7 @@ const pool = require('../../db');
 const router8 = Router();
 
 router8.get('/', (request, response, next) => {
-    pool.query('SELECT glocalId, vendorCaseId, dateIdCreated, assignedAccountManager, assignedSystemsEngineer, case_status, caseDescription, caseTitle, customer, customerName, dateRaised, glocalId, productName, severity, systemsEngineerLead, vendor FROM case_monitoring', (err, res) => {
+    pool.query('SELECT glocalId, vendorCaseId, dateIdCreated, assignedAccountManager, leads, case_status, caseDescription, caseTitle, customer, dateRaised, glocalId, productName, severity, systemsEngineerLead, vendor FROM case_monitoring', (err, res) => {
         if (err) return next(err);
 
         console.log('SHOWING ALL CASES');
@@ -30,7 +30,7 @@ router8.get('/:glocalId', (request, response, next) => {
 
 router8.get('/customer/:customer', (request, response, next) => {
     const { customer } = request.params
-    pool.query('SELECT customer, case_status, assignedSystemsEngineer, severity, caseTitle, productName, dateRaised FROM case_monitoring WHERE customer = ($1)', [customer], (err, res) => {
+    pool.query('SELECT customer, case_status, leads, severity, caseTitle, productName, dateRaised FROM case_monitoring WHERE customer = ($1)', [customer], (err, res) => {
         if (err) return next(err);
 
         console.log(request.query);
@@ -40,7 +40,7 @@ router8.get('/customer/:customer', (request, response, next) => {
 
 router8.get('/case_status/:case_status', (request, response, next) => {
     const { case_status } = request.params
-    pool.query('SELECT customer, case_status, assignedSystemsEngineer, severity, caseTitle, productName, dateRaised FROM case_monitoring WHERE case_status = ($1)', [case_status], (err, res) => {
+    pool.query('SELECT customer, case_status, leads, severity, caseTitle, productName, dateRaised FROM case_monitoring WHERE case_status = ($1)', [case_status], (err, res) => {
         if (err) return next(err);
 
         console.log(request.query);
@@ -48,9 +48,9 @@ router8.get('/case_status/:case_status', (request, response, next) => {
     });
 });
 
-router8.get('/assignedSystemsEngineer/:assignedSystemsEngineer', (request, response, next) => {
-    const { assignedSystemsEngineer } = request.params
-    pool.query('SELECT customer, case_status, assignedSystemsEngineer, severity, caseTitle, productName, dateRaised FROM case_monitoring WHERE assignedSystemsEngineer = ARRAY[($1)]', [assignedSystemsEngineer], (err, res) => {
+router8.get('/leads/:leads', (request, response, next) => {
+    const { leads } = request.params
+    pool.query('SELECT customer, case_status, leads, severity, caseTitle, productName, dateRaised FROM case_monitoring WHERE leads = ARRAY[($1)]', [leads], (err, res) => {
         if (err) return next(err);
 
         console.log(request.query);
@@ -60,7 +60,7 @@ router8.get('/assignedSystemsEngineer/:assignedSystemsEngineer', (request, respo
 
 router8.get('/severity/:severity', (request, response, next) => {
     const { severity } = request.params
-    pool.query('SELECT customer, case_status, assignedSystemsEngineer, severity, caseTitle, productName, dateRaised FROM case_monitoring WHERE severity = ($1)', [severity], (err, res) => {
+    pool.query('SELECT customer, case_status, leads, severity, caseTitle, productName, dateRaised FROM case_monitoring WHERE severity = ($1)', [severity], (err, res) => {
         if (err) return next(err);
         console.log(request.query);
         response.json(res.rows);
@@ -69,7 +69,7 @@ router8.get('/severity/:severity', (request, response, next) => {
 
 router8.get('/vendor/:vendor', (request, response, next) => {
     const { vendor } = request.params
-    pool.query('SELECT customer, case_status, assignedSystemsEngineer, severity, caseTitle, productName, dateRaised FROM case_monitoring WHERE vendor = ($1)', [vendor], (err, res) => {
+    pool.query('SELECT customer, case_status, leads, severity, caseTitle, productName, dateRaised FROM case_monitoring WHERE vendor = ($1)', [vendor], (err, res) => {
         if (err) return next(err);
         console.log(request.query);
         response.json(res.rows);
@@ -78,7 +78,7 @@ router8.get('/vendor/:vendor', (request, response, next) => {
 
 router8.get('/productName/:productName', (request, response, next) => {
     const { productName } = request.params
-    pool.query('SELECT customer, case_status, assignedSystemsEngineer, severity, caseTitle, productName, dateRaised FROM case_monitoring WHERE productName = ($1)', [productName], (err, res) => {
+    pool.query('SELECT customer, case_status, leads, severity, caseTitle, productName, dateRaised FROM case_monitoring WHERE productName = ($1)', [productName], (err, res) => {
         if (err) return next(err);
         console.log(request.query);
         response.json(res.rows);
@@ -87,7 +87,7 @@ router8.get('/productName/:productName', (request, response, next) => {
 
 router8.get('/dateRaised/:dateRaised', (request, response, next) => {
     const { dateRaised } = request.params
-    pool.query('SELECT customer, case_status, assignedSystemsEngineer, severity, caseTitle, productName, dateRaised FROM case_monitoring WHERE EXTRACT(month from dateRaised)=($1)', [dateRaised], (err, res) => {
+    pool.query('SELECT customer, case_status, leads, severity, caseTitle, productName, dateRaised FROM case_monitoring WHERE EXTRACT(month from dateRaised)=($1)', [dateRaised], (err, res) => {
         if (err) return next(err);
         console.log(request.query);
         response.json(res.rows);
@@ -95,10 +95,10 @@ router8.get('/dateRaised/:dateRaised', (request, response, next) => {
 });
 
 router8.post('/', (request, response, next) => {
-    const { vendorCaseId, dateIdCreated, dateRaised, caseTitle, caseDescription, severity, vendor, customer, productName, customerName, systemsEngineerLead, assignedAccountManager, assignedSystemsEngineer, case_status } = request.body;
+    const { vendorCaseId, dateIdCreated, dateRaised, caseTitle, caseDescription, severity, vendor, customer, systemsEngineerLead, assignedAccountManager, leads, case_status } = request.body;
 
     pool.query(
-        'INSERT INTO case_monitoring( vendorCaseId, dateIdCreated, dateRaised, caseTitle, caseDescription, severity, vendor, customer, productName, customerName, systemsEngineerLead, assignedAccountManager, assignedSystemsEngineer, case_status) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)', [vendorCaseId, dateIdCreated, dateRaised, caseTitle, caseDescription, severity, vendor, customer, productName, customerName, systemsEngineerLead, assignedAccountManager, assignedSystemsEngineer, case_status],
+        'INSERT INTO case_monitoring( vendorCaseId, dateIdCreated, dateRaised, caseTitle, caseDescription, severity, vendor, customer, systemsEngineerLead, assignedAccountManager, leads, case_status) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)', [vendorCaseId, dateIdCreated, dateRaised, caseTitle, caseDescription, severity, vendor, customer, systemsEngineerLead, assignedAccountManager, leads, case_status],
         (err, res) => {
             if (err) return next(err);
 
@@ -111,7 +111,7 @@ router8.post('/', (request, response, next) => {
 
 router8.put('/:glocalId', (request, response, next) => {
     const { glocalId } = request.params;
-    const keys = ['vendorCaseId', 'dateIdCreated', 'dateRaised', 'caseTitle', 'caseDescription', 'severity', 'vendor', 'customer', 'productName', 'customerName', 'systemsEngineerLead', 'assignedAccountManager', 'assignedSystemsEngineer', 'case_status'];
+    const keys = ['vendorCaseId', 'dateIdCreated', 'dateRaised', 'caseTitle', 'caseDescription', 'severity', 'vendor', 'customer', 'pr', 'systemsEngineerLead', 'assignedAccountManager', 'leads', 'case_status'];
     const fields = [];
 
     keys.forEach(key => {
