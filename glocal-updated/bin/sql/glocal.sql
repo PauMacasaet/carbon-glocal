@@ -88,7 +88,7 @@ VALUES
 
 INSERT INTO vendor(principal)
 VALUES
-('Symmantec'),
+('Symantec'),
 ('Veritas');
 
 INSERT INTO client(accountName, contact_details, company_address, accountManager)
@@ -99,11 +99,11 @@ VALUES
 INSERT INTO products(productName, vendor)
 VALUES
 ('Multi-Cloud','Veritas'),
-('Secure Web Gateway','Symmantec');
+('Secure Web Gateway','Symantec');
 
 INSERT INTO license(date_start, date_end, vendor, productName, client, particulars,on_site, support_date_start, support_date_end, man_days, remaining_man_days, quarterly_hc, remarks)
 VALUES
-('05/01/2018','05/01/2019','Symmantec','Multi-Cloud','BPI','particular 1','8x5','06/05/2018','06/15/2018',13,12,TRUE,'remarks'),
+('05/01/2018','05/01/2019','Symantec','Multi-Cloud','BPI','particular 1','8x5','06/05/2018','06/15/2018',13,12,TRUE,'remarks'),
 ('11/28/2018','05/01/2019','Veritas','Secure Web Gateway','Unionbank','particular 2','24x7','12/05/2018','12/15/2018',13,12,TRUE,'remarks');
 
 INSERT INTO contact_person(client, personName)
@@ -114,9 +114,9 @@ VALUES
 INSERT INTO case_monitoring(vendorCaseId, dateIdCreated, dateRaised, caseTitle, caseDescription, severity, vendor, customer, productName, systemsEngineerLead, assignedAccountManager, leads, case_status)
 VALUES
 ('JF1','01/08/2018','01/07/2018','Attend to failure of backup','troubleshoot',1,'Veritas','Unionbank','Multi-Cloud','Jefferson','Mei','John Jenkins', 'Ongoing'),
-('JF2','03/08/2018','03/07/2018','Fix server for backup','install updates',1,'Symmantec','BPI','Secure Web Gateway','Jeffrey','Maan','Aaron Hernandez', 'Resolved'),
+('JF2','03/08/2018','03/07/2018','Fix server for backup','install updates',1,'Symantec','BPI','Secure Web Gateway','Jeffrey','Maan','Aaron Hernandez', 'Resolved'),
 ('JF3','04/04/2018', '04/01/2018', 'Error 404', 'fix error', 2, 'Veritas', 'BPI', 'Secure Web Gateway', 'Jefferson', 'Mei', 'Aaron Hernandez', 'Ongoing'),
-('JF4', '04/07/2018', '04/06/2018', 'Fix server for backup', 'install updates', 2, 'Symmantec', 'Unionbank', 'Multi-Cloud', 'Oliver', 'Maan','Isaiah Solomon', 'Pending (Glo-cal)'),
+('JF4', '04/07/2018', '04/06/2018', 'Fix server for backup', 'install updates', 2, 'Symantec', 'Unionbank', 'Multi-Cloud', 'Oliver', 'Maan','Isaiah Solomon', 'Pending (Glo-cal)'),
 ('JF5', '05/11/2018', '05/09/2018', 'Attend to failure of backup', 'troubleshoot', 2, 'Veritas', 'BPI', 'Secure Web Gateway', 'Jeffrey', 'Mei', 'Aaron Hernandez', 'Pending (Client)'),
 ('JF6', '05/11/2018', '05/09/2018', 'Attend to failure of backup', 'troubleshoot', 2, 'Veritas', 'BPI', 'Secure Web Gateway', 'Jeffrey', 'Mei', 'John Jenkins', 'Pending (Client)');
 
