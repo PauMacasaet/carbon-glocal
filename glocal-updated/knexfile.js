@@ -7,7 +7,7 @@ module.exports = {
     connection: 'postgres://postgres:1Paulomac@localhost:5432/glocaldb'
   },
   production: {
-    client: 'postgresql',
+    client: 'pg',
     connection: process.env.DATABASE_URL
   }
 
