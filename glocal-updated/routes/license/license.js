@@ -12,15 +12,26 @@ router3.get('/', (request, response, next) => {
     });
 });
 
-router3.get('/:productName', (request, response, next) => {
-    const { productName } = request.params
-    pool.query('SELECT client, date_start, date_end, support_date_start, support_date_end, particulars, on_site FROM license WHERE productname= ($1)', [productName], (err, res) => {
+router3.get('/:licenseId', (request, response, next) => {
+    const { licenseId } = request.params
+    pool.query('SELECT client, date_start, date_end, support_date_start, support_date_end, particulars, on_site FROM license WHERE licenseId= ($1)', [licenseId], (err, res) => {
         if (err) return next(err);
 
         console.log('RETRIEVING LIST BY product license');
         response.json(res.rows);
     });
 });
+
+router3.get('/product/:productName', (request, response, next) => {
+    const { productName } = request.params
+    pool.query('SELECT client, date_start, date_end, support_date_start, support_date_end, particulars, on_site FROM license WHERE productName= ($1)', [productName], (err, res) => {
+        if (err) return next(err);
+
+        console.log('RETRIEVING LIST BY product license');
+        response.json(res.rows);
+    });
+});
+
 
 router3.post('/', (request, response, next) => {
     const { date_start, date_end, vendor, productName, client, particulars, on_site, support_date_start, support_date_end, man_days, remaining_man_days, quarterly_hc, remarks } = request.body;

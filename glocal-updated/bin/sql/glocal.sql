@@ -57,13 +57,13 @@ CREATE TABLE case_monitoring(
 	productName varchar(50) references products(productName) ON UPDATE CASCADE NOT NULL,
 	systemsEngineerLead varchar(50),
 	assignedAccountManager varchar(50),
-    assignedSystemsEngineer text[][] NOT NULLnp,
+    assignedSystemsEngineer text[][] NOT NULL,
 	leads varchar(50) NOT NULL,
 	case_status varchar(50) NOT NULL
 );
 
 CREATE TABLE activities(
-	trackingNo serial references case_monitoring(glocalId) ON UPDATE CASCADE NOT NULL,
+	trackingNo int references case_monitoring(glocalId) ON UPDATE CASCADE NOT NULL,
 	activityNo serial,
 	timeIn timestamp NOT NULL, 
 	timeOuts timestamp NOT NULL,
