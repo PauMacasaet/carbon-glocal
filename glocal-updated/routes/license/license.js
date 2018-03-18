@@ -30,13 +30,15 @@ router3.post('/', (request, response, next) => {
         (err, res) => {
             if (err) return next(err);
 
-            console.log('license created');
+            response.json({
+                "create license": "license created"
+            });
         }
     );
 });
 
-router3.put('/:productName', (request, response, next) => {
-    const { productName } = request.params;
+router3.put('/:licenseId', (request, response, next) => {
+    const { licenseId } = request.params;
     const keys = ['date_start', 'date_end, vendor', 'productName', 'client', 'particulars', 'on_site', 'support_date_start', 'support_date_end', 'man_days', 'remaining_man_days', 'quarterly_hc', 'remarks'];
     const fields = [];
 
@@ -47,26 +49,31 @@ router3.put('/:productName', (request, response, next) => {
     //partial updating
     fields.forEach((field, index) => {
         pool.query(
-            `UPDATE license SET ${field} = ($1) WHERE productName =($2)`, [request.body[field], productName],
+            `UPDATE license SET ${field} = ($1) WHERE licenseId =($2)`, [request.body[field], licenseId],
             (err, res) => {
                 if (err) return next(err);
 
 
                 if (index === fields.length - 1)
-                    console.log('UPDATING license record');
+                    response.json({
+                        "create license": "license created"
+                    });
             }
         )
     });
 });
 
-router3.delete('/:productName', (request, response, next) => {
-    const { productName } = request.params;
+router3.delete('/:licenseId', (request, response, next) => {
+    const { licenseId } = request.params;
 
     pool.query(
-        'DELETE FROM license WHERE productName = ($1)', [productName],
+        'DELETE FROM license WHERE licenseId = ($1)', [licenseId],
         (err, res) => {
             if (err) return next(err);
 
+            response.json({
+                "create license": "license created"
+            });
         }
     );
 });

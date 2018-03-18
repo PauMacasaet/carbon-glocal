@@ -36,7 +36,7 @@ CREATE TABLE license(
 	man_days int NOT NULL,
 	remaining_man_days int NOT NULL,
 	quarterly_hc boolean NOT NULL,
-	remarks varchar(200) 
+	remarks varchar(2000) 
 );
 
 CREATE TABLE contact_person(
@@ -73,9 +73,9 @@ CREATE TABLE activities(
 	addres varchar(50) NOT NULL, 
 	typeOfActivity varchar(50) NOT NULL, 
 	purposeOfVisit varchar(50) NOT NULL,
-	activityPerformed varchar(250) NOT NULL,
-	nextActivity varchar(250) NOT NULL,
-	recommendations varchar(250),
+	activityPerformed varchar(2000) NOT NULL,
+	nextActivity varchar(2000) NOT NULL,
+	recommendations varchar(2000),
 	engid int references engineer(engId) NOT NULL,
 	engineerName varchar(50)
 );
