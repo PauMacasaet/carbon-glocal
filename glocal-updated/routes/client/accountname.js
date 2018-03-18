@@ -23,10 +23,10 @@ router11.get('/:accountName', (request, response, next) => {
 });
 
 router11.post('/', (request, response, next) => {
-    const { accountName, contact_details, company_address, systemEngineerLead, accountManager } = request.body;
+    const { accountName, contact_details, company_address, accountManager } = request.body;
 
     pool.query(
-        'INSERT INTO client(accountName, contact_details, company_address, systemEngineerLead, accountManager) VALUES($1, $2, $3, $4, $5)', [accountName, contact_details, company_address, systemEngineerLead, accountManager],
+        'INSERT INTO client(accountName, contact_details, company_address, accountManager) VALUES($1, $2, $3, $4)', [accountName, contact_details, company_address, accountManager],
         (err, res) => {
             if (err) return next(err);
 
@@ -39,7 +39,7 @@ router11.post('/', (request, response, next) => {
 
 router11.put('/:accountName', (request, response, next) => {
     const { accountName } = request.params;
-    const keys = ['accountName', 'contact_details', 'company_address', 'systemEngineerLead', 'accountManager'];
+    const keys = ['accountName', 'contact_details', 'company_address', 'accountManager'];
     const fields = [];
 
     keys.forEach(key => {
@@ -64,11 +64,11 @@ router11.put('/:accountName', (request, response, next) => {
     });
 });
 
-router11.delete('/:client', (request, response, next) => {
+router11.delete('/:accountName', (request, response, next) => {
     const { client } = request.params;
 
     pool.query(
-        'DELETE FROM client WHERE client = ($1)', [client],
+        'DELETE FROM client WHERE accountName = ($1)', [accountName],
         (err, res) => {
             if (err) return next(err);
 
