@@ -1,5 +1,5 @@
 CREATE TABLE engineer(
-	engId int  unique PRIMARY KEY NOT NULL,
+	engId serial unique PRIMARY KEY NOT NULL,
 	department varchar(50) NOT NULL,
 	firstName varchar(50) NOT NULL,
 	lastName varchar(50) NOT NULL,
@@ -57,6 +57,7 @@ CREATE TABLE case_monitoring(
 	productName varchar(50) references products(productName) ON UPDATE CASCADE NOT NULL,
 	systemsEngineerLead varchar(50),
 	assignedAccountManager varchar(50),
+    assignedSystemsEngineer text[][] NOT NULLnp,
 	leads varchar(50) NOT NULL,
 	case_status varchar(50) NOT NULL
 );
@@ -79,12 +80,12 @@ CREATE TABLE activities(
 	engineerName varchar(50)
 );
 
-INSERT INTO engineer(engId, department, firstName, lastName, isLead)
+INSERT INTO engineer(department, firstName, lastName, isLead)
 VALUES 
-(001,'Security','John','Jenkins', FALSE),
-(002,'Availability','Isaiah','Solomon', FALSE),
-(003, 'Security','Aaron','Hernandez', FALSE),
-(004, 'Availability', 'Richard', 'Cruz', TRUE);
+('Security','John','Jenkins', FALSE),
+('Availability','Isaiah','Solomon', FALSE),
+( 'Security','Aaron','Hernandez', FALSE),
+( 'Availability', 'Richard', 'Cruz', TRUE);
 
 INSERT INTO vendor(principal)
 VALUES
@@ -111,14 +112,14 @@ VALUES
 ('BPI','John Vincent Agbayani'),
 ('Unionbank','John Karlo Tabios');
 
-INSERT INTO case_monitoring(vendorCaseId, dateIdCreated, dateRaised, caseTitle, caseDescription, severity, vendor, customer, productName, systemsEngineerLead, assignedAccountManager, leads, case_status)
+INSERT INTO case_monitoring(vendorCaseId, dateIdCreated, dateRaised, caseTitle, caseDescription, severity, vendor, customer, productName, systemsEngineerLead, assignedAccountManager, assignedSystemsEngineer, leads, case_status)
 VALUES
-('JF1','01/08/2018','01/07/2018','Attend to failure of backup','troubleshoot',1,'Veritas','Unionbank','Multi-Cloud','Jefferson','Mei','John Jenkins', 'Ongoing'),
-('JF2','03/08/2018','03/07/2018','Fix server for backup','install updates',1,'Symantec','BPI','Secure Web Gateway','Jeffrey','Maan','Aaron Hernandez', 'Resolved'),
-('JF3','04/04/2018', '04/01/2018', 'Error 404', 'fix error', 2, 'Veritas', 'BPI', 'Secure Web Gateway', 'Jefferson', 'Mei', 'Aaron Hernandez', 'Ongoing'),
-('JF4', '04/07/2018', '04/06/2018', 'Fix server for backup', 'install updates', 2, 'Symantec', 'Unionbank', 'Multi-Cloud', 'Oliver', 'Maan','Isaiah Solomon', 'Pending (Glo-cal)'),
-('JF5', '05/11/2018', '05/09/2018', 'Attend to failure of backup', 'troubleshoot', 2, 'Veritas', 'BPI', 'Secure Web Gateway', 'Jeffrey', 'Mei', 'Aaron Hernandez', 'Pending (Client)'),
-('JF6', '05/11/2018', '05/09/2018', 'Attend to failure of backup', 'troubleshoot', 2, 'Veritas', 'BPI', 'Secure Web Gateway', 'Jeffrey', 'Mei', 'John Jenkins', 'Pending (Client)');
+('JF1','01/08/2018','01/07/2018','Attend to failure of backup','troubleshoot',1,'Veritas','Unionbank','Multi-Cloud','Jefferson','Mei',ARRAY[['Isaiah Solomon'],['Aaron Hernandez']],'John Jenkins', 'Ongoing'),
+('JF2','03/08/2018','03/07/2018','Fix server for backup','install updates',1,'Symantec','BPI','Secure Web Gateway','Jeffrey','Maan',ARRAY[['Isaiah Solomon']], 'Aaron Hernandez', 'Resolved'),
+('JF3','04/04/2018', '04/01/2018', 'Error 404', 'fix error', 2, 'Veritas', 'BPI', 'Secure Web Gateway', 'Jefferson', 'Mei',ARRAY[['Isaiah Solomon']], 'Aaron Hernandez', 'Ongoing'),
+('JF4', '04/07/2018', '04/06/2018', 'Fix server for backup', 'install updates', 2, 'Symantec', 'Unionbank', 'Multi-Cloud', 'Oliver', 'Maan',ARRAY[['Aaron Hernandez']],'Isaiah Solomon', 'Pending (Glo-cal)'),
+('JF5', '05/11/2018', '05/09/2018', 'Attend to failure of backup', 'troubleshoot', 2, 'Veritas', 'BPI', 'Secure Web Gateway', 'Jeffrey', 'Mei', ARRAY[['John Jenkins']],'Aaron Hernandez', 'Pending (Client)'),
+('JF6', '05/11/2018', '05/09/2018', 'Attend to failure of backup', 'troubleshoot', 2, 'Veritas', 'BPI', 'Secure Web Gateway', 'Jeffrey', 'Mei', ARRAY[['Aaron Hernandez']],'John Jenkins', 'Pending (Client)');
 
 
 INSERT INTO activities(trackingNo, timeIn, timeOuts, productName, client,  contactCustomer, addres, typeOfActivity, purposeOfVisit, activityPerformed, nextActivity, recommendations, engid, engineerName)

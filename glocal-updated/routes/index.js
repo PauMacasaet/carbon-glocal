@@ -15,6 +15,7 @@ const productvendor = require('./products/productvendor');
 
 //client table
 const accountName = require('./client/accountname');
+const accountManager = require('./client/accountmanager');
 
 //contact person
 const contactPerson = require('./contact person/contactp');
@@ -75,6 +76,7 @@ router.use('/productvendor', productvendor);
 
 //client
 router.use('/client', accountName); //create and update
+router.use('/accountmanager', accountManager);
 
 //contact person
 router.use('/contactp', contactPerson); //create and update

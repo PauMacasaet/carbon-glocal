@@ -4,7 +4,7 @@ const pool = require('../../db');
 const router8 = Router();
 
 router8.get('/', (request, response, next) => {
-    pool.query('SELECT glocalId, vendorCaseId, dateIdCreated, assignedAccountManager, leads, case_status, caseDescription, caseTitle, customer, dateRaised, glocalId, productName, severity, systemsEngineerLead, vendor FROM case_monitoring', (err, res) => {
+    pool.query('SELECT glocalId, vendorCaseId, dateIdCreated, assignedAccountManager, assignedSystemsEngineer, leads, case_status, caseDescription, caseTitle, customer, dateRaised, glocalId, productName, severity, systemsEngineerLead, vendor FROM case_monitoring', (err, res) => {
         if (err) return next(err);
 
         console.log('SHOWING ALL CASES');
