@@ -26,7 +26,7 @@ router11.post('/', (request, response, next) => {
     const { client, personName } = request.body;
 
     pool.query(
-        'INSERT INTO client(client, personName) VALUES($1, $2)', [client, personName],
+        'INSERT INTO contact_person(client, personName) VALUES($1, $2)', [client, personName],
         (err, res) => {
             if (err) return next(err);
 
@@ -68,7 +68,7 @@ router11.delete('/:contactPerson', (request, response, next) => {
     const { contactPerson } = request.params;
 
     pool.query(
-        'DELETE FROM client WHERE contact_person = ($1)', [contactPerson],
+        'DELETE FROM contact_person WHERE contactPerson = ($1)', [contactPerson],
         (err, res) => {
             if (err) return next(err);
 
