@@ -12,8 +12,8 @@ router3.get('/', (request, response, next) => {
     });
 });
 
-router3.get('/:trackingNo', (request, response, next) => {
-    const { trackingNo } = request.params
+router3.get('/:activityNo', (request, response, next) => {
+    const { activityNo } = request.params
     pool.query('SELECT engid, productName, typeOfActivity, purposeOfVisit, activityPerformed, nextActivity, recommendations, timeIn, timeOuts, engineerName as engineerSurname FROM activities WHERE trackingNo= ($1)', [trackingNo], (err, res) => {
         if (err) return next(err);
 
@@ -37,8 +37,8 @@ router3.post('/', (request, response, next) => {
     );
 });
 
-router3.put('/:trackingNo', (request, response, next) => {
-    const { trackingNo } = request.params;
+router3.put('/:activityNo', (request, response, next) => {
+    const { activityNo } = request.params;
     const keys = ['trackingNo', 'timeIn', 'timeOuts', 'productName', 'client', 'contactCustomer', 'addres', 'typeOfActivity', 'purposeOfVisit', 'activityPerformed', 'nextActivity', 'recommendations', 'engid', 'engineerName'];
     const fields = [];
 
@@ -49,7 +49,7 @@ router3.put('/:trackingNo', (request, response, next) => {
     //partial updating
     fields.forEach((field, index) => {
         pool.query(
-            `UPDATE activities SET ${field} = ($1) WHERE trackingNo =($2)`, [request.body[field], trackingNo],
+            `UPDATE activities SET ${field} = ($1) WHERE activityNo =($2)`, [request.body[field], activityNo],
             (err, res) => {
                 if (err) return next(err);
 
@@ -63,11 +63,11 @@ router3.put('/:trackingNo', (request, response, next) => {
     });
 });
 
-router3.delete('/:trackingNo', (request, response, next) => {
-    const { trackingNo } = request.params;
+router3.delete('/:activityNo', (request, response, next) => {
+    const { activityNo } = request.params;
 
     pool.query(
-        'DELETE FROM activities WHERE trackingNo = ($1)', [trackingNo],
+        'DELETE FROM activities WHERE activityNo = ($1)', [activityNo],
         (err, res) => {
             if (err) return next(err);
             response.json({

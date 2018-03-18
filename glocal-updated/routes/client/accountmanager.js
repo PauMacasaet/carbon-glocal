@@ -4,7 +4,7 @@ const pool = require('../../db');
 const router11 = Router();
 
 router11.get('/', (request, response, next) => {
-    pool.query('SELECT * from client', (err, res) => {
+    pool.query('SELECT client, accountManager from client', (err, res) => {
         if (err) return next(err);
 
         console.log('RETRIEVING ALL RECORDS FROM client TABLE');

@@ -4,7 +4,7 @@ const pool = require('../../db');
 const router3 = Router();
 
 router3.get('/', (request, response, next) => {
-    pool.query('SELECT * from license', (err, res) => {
+    pool.query('SELECT client, vendor, productName, date_start, date_end, particulars, accountManager AS assignedAM FROM license l JOIN client c  ON c.accountName = l.client', (err, res) => {
         if (err) return next(err);
 
         console.log('RETRIEVING ALL RECORDS FROM LICENSE TABLE');
@@ -14,7 +14,7 @@ router3.get('/', (request, response, next) => {
 
 router3.get('/:licenseId', (request, response, next) => {
     const { licenseId } = request.params
-    pool.query('SELECT client, date_start, date_end, support_date_start, support_date_end, particulars, on_site FROM license WHERE licenseId= ($1)', [licenseId], (err, res) => {
+    pool.query('SELECT client, vendor, productName, date_start, date_end, particulars, accountManager AS assignedAM FROM license l JOIN client c  ON c.accountName = l.client WHERE licenseId= ($1)', [licenseId], (err, res) => {
         if (err) return next(err);
 
         console.log('RETRIEVING LIST BY product license');
