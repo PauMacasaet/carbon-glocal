@@ -70,7 +70,7 @@ CREATE TABLE activities(
 	productName varchar(50) references products(productName) ON UPDATE CASCADE NOT NULL,
 	client varchar(50) NOT NULL,
 	contactCustomer varchar(50) references contact_person(personName) NOT NULL,
-	addres varchar(50) NOT NULL, 
+	addres varchar(100) NOT NULL, 
 	typeOfActivity varchar(50) NOT NULL, 
 	purposeOfVisit varchar(50) NOT NULL,
 	activityPerformed varchar(2000) NOT NULL,
