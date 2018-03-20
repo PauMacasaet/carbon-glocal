@@ -4,7 +4,7 @@ const pool = require('../../db');
 const router5 = Router();
 
 router5.get('/', (request, response, next) => {
-    pool.query('SELECT last_value +1 FROM case_monitoring_glocalId_seq AS next_id', (err, res) => {
+    pool.query('SELECT last_value +1 AS next_id FROM case_monitoring_glocalId_seq', (err, res) => {
         if (err) return next(err);
 
         console.log('RETRIEVING next glocalid');

@@ -14,10 +14,10 @@ router3.get('/', (request, response, next) => {
 
 router3.get('/:activityNo', (request, response, next) => {
     const { activityNo } = request.params
-    pool.query('SELECT engid, productName, typeOfActivity, purposeOfVisit, activityPerformed, nextActivity, recommendations, timeIn, timeOuts, engineerName as engineerSurname FROM activities WHERE trackingNo= ($1)', [trackingNo], (err, res) => {
+    pool.query('SELECT engid, productName, typeOfActivity, purposeOfVisit, activityPerformed, nextActivity, recommendations, timeIn, timeOuts, engineerName as engineerSurname FROM activities WHERE activityNo= ($1)', [activityNo], (err, res) => {
         if (err) return next(err);
 
-        console.log('RETRIEVING LIST from activities bY engid');
+        console.log('RETRIEVING LIST from activities bY activityno');
         response.json(res.rows);
     });
 });
