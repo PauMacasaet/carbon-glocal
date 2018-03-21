@@ -4,7 +4,7 @@ const pool = require('../../db');
 const router = Router();
 
 router.get('/', (request, response, next) => {
-    pool.query("SELECT CONCAT (firstName, ' ' ,lastName) AS fullName, activityNo, productName, client, contactCustomer, typeOfActivity, purposeOfVisit, activityPerformed, nextActivity, recommendations, e.engId FROM activities a JOIN engineer e ON a.engId = e.engid;", (err, res) => {
+    pool.query("SELECT activityNo, productName, client, contactCustomer, typeOfActivity, purposeOfVisit, activityPerformed, nextActivity, recommendations, e.engid, CONCAT (firstName, ' ' ,lastName) AS fullName FROM activities a JOIN engineer e ON a.engid = e.engid;", (err, res) => {
         if (err) return next(err);
 
         console.log('RETRIEVING ALL engineer activities');
@@ -12,9 +12,9 @@ router.get('/', (request, response, next) => {
     });
 });
 
-router.get('/:engId', (request, response, next) => {
-    const { engId } = request.params
-    pool.query('SELECT activityNo, productName, client, contactCustomer, typeOfActivity, purposeOfVisit, activityPerformed, nextActivity, recommendations, e.engId, firstName, lastName FROM activities a JOIN engineer e ON a.engId = e.engid WHERE e.engId = $1', [engId], (err, res) => {
+router.get('/:engid', (request, response, next) => {
+    const { engid } = request.params
+    pool.query('SELECT activityNo, productName, client, contactCustomer, typeOfActivity, purposeOfVisit, activityPerformed, nextActivity, recommendations, e.engid, firstName, lastName FROM activities a JOIN engineer e ON a.engid = e.engid WHERE e.engid = $1', [engid], (err, res) => {
         if (err) return next(err);
 
         console.log('RETRIEVING activity by engineer id');

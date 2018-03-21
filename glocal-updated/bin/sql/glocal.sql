@@ -1,5 +1,5 @@
 CREATE TABLE engineer(
-	engId serial unique PRIMARY KEY NOT NULL,
+	engid serial unique PRIMARY KEY NOT NULL,
 	department varchar(50) NOT NULL,
 	firstName varchar(50) NOT NULL,
 	lastName varchar(50) NOT NULL,
@@ -75,7 +75,7 @@ CREATE TABLE activities(
 	activityPerformed varchar(2000) NOT NULL,
 	nextActivity varchar(2000) NOT NULL,
 	recommendations varchar(2000),
-	engid int references engineer(engId) NOT NULL,
+	engid int references engineer(engid) NOT NULL,
 	engineerName varchar(50)
 );
 
