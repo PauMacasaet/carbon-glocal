@@ -4,7 +4,7 @@ const pool = require('../../db');
 const router = Router();
 
 router.get('/', (request, response, next) => {
-    pool.query('SELECT activityNo, productName, client, contactCustomer, typeOfActivity, purposeOfVisit, activityPerformed, nextActivity, recommendations, e.engId, firstName, lastName FROM activities a JOIN engineer e ON a.engId = e.engid;', (err, res) => {
+    pool.query("SELECT CONCAT (firstName, ' ' ,lastName) AS fullName, activityNo, productName, client, contactCustomer, typeOfActivity, purposeOfVisit, activityPerformed, nextActivity, recommendations, e.engId FROM activities a JOIN engineer e ON a.engId = e.engid;", (err, res) => {
         if (err) return next(err);
 
         console.log('RETRIEVING ALL engineer activities');
