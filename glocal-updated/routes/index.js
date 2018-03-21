@@ -5,6 +5,7 @@ const engId = require('./engineer/engId');
 const name = require('./engineer/name');
 const department = require('./engineer/department');
 const isLead = require('./engineer/isLead');
+const engActivities = require('./engineer/engactivities');
 
 //vendor table
 const principal = require('./vendor/vendor');
@@ -66,6 +67,7 @@ router.use('/engineer', engId); //create and update
 router.use('/name', name);
 router.use('/department', department);
 router.use('/isLead', isLead);
+router.use('/engactivities', engActivities);
 
 //vendor routes
 router.use('/vendor', principal); //create and update
