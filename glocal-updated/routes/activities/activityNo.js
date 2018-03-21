@@ -4,7 +4,7 @@ const pool = require('../../db');
 const router3 = Router();
 
 router3.get('/', (request, response, next) => {
-    pool.query('SELECT * from activities', (err, res) => {
+    pool.query("SELECT a.engid, productName, typeOfActivity, purposeOfVisit, activityPerformed, nextActivity, recommendations, timeIn, timeOuts, CONCAT(firstName,' ', lastName) AS fullName FROM activities a JOIN engineer e ON a.engid = e.engId", (err, res) => {
         if (err) return next(err);
 
         console.log('RETRIEVING ALL RECORDS FROM ACTIVITIES TABLE');
@@ -14,7 +14,7 @@ router3.get('/', (request, response, next) => {
 
 router3.get('/:activityNo', (request, response, next) => {
     const { activityNo } = request.params
-    pool.query('SELECT engid, productName, typeOfActivity, purposeOfVisit, activityPerformed, nextActivity, recommendations, timeIn, timeOuts, engineerName as engineerSurname FROM activities WHERE activityNo= ($1)', [activityNo], (err, res) => {
+    pool.query("SELECT a.engid, productName, typeOfActivity, purposeOfVisit, activityPerformed, nextActivity, recommendations, timeIn, timeOuts, CONCAT(firstName,' ', lastName) AS fullName FROM activities a JOIN engineer e ON a.engid = e.engId WHERE activityNo= ($1)", [activityNo], (err, res) => {
         if (err) return next(err);
 
         console.log('RETRIEVING LIST from activities bY activityno');
