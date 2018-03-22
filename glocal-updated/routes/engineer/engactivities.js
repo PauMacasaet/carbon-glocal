@@ -4,7 +4,7 @@ const pool = require('../../db');
 const router = Router();
 
 router.get('/', (request, response, next) => {
-    pool.query("SELECT activityNo, productName, client, contactCustomer, typeOfActivity, purposeOfVisit, activityPerformed, nextActivity, recommendations, assignedSystemsEngineer[0:1][0:2] AS FirstEngineer, assignedSystemsEngineer[2:2][2] AS SecondEngineer FROM activities", (err, res) => {
+    pool.query("SELECT activityNo, productName, client, contactCustomer, typeOfActivity, purposeOfVisit, activityPerformed, nextActivity, recommendations, assignedSystemsEngineer AS Engineers FROM activities", (err, res) => {
         if (err) return next(err);
 
         console.log('RETRIEVING ALL engineer activities');
