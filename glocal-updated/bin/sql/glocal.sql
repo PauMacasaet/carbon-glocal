@@ -75,7 +75,7 @@ CREATE TABLE activities(
 	activityPerformed varchar(2000) NOT NULL,
 	nextActivity varchar(2000) NOT NULL,
 	recommendations varchar(2000),
-	engid int references engineer(engid) NOT NULL
+	assignedSystemsEngineer text[][] NOT NULL
 );
 
 INSERT INTO engineer(department, firstName, lastName, isLead)
@@ -119,10 +119,10 @@ VALUES
 ('JF5', '05/11/2018', '05/09/2018', 'Attend to failure of backup', 'troubleshoot', 2, 'Veritas', 'BPI', 'Secure Web Gateway', 'Jeffrey', 'Mei', ARRAY[['John Jenkins']], 'Pending (Client)'),
 ('JF6', '05/11/2018', '05/09/2018', 'Attend to failure of backup', 'troubleshoot', 2, 'Veritas', 'BPI', 'Secure Web Gateway', 'Jeffrey', 'Mei', ARRAY[['Aaron Hernandez']], 'Pending (Client)');
 
-INSERT INTO activities(trackingNo, timeIn, timeOuts, productName, client,  contactCustomer, addres, typeOfActivity, purposeOfVisit, activityPerformed, nextActivity, recommendations, engid)
+INSERT INTO activities(trackingNo, timeIn, timeOuts, productName, client,  contactCustomer, addres, typeOfActivity, purposeOfVisit, activityPerformed, nextActivity, recommendations, assignedSystemsEngineer)
 VALUES
-(001,'2018-01-08 12:24:00', '2018-01-08 15:05:00', 'Multi-Cloud','Unionbank','John Karlo Tabios','unionbank','OnSite','troubleshoot','checked if modules are up to date','install updates', 'no recommendations',001),
-(001, '2018-03-08 13:32:00','2018-03-08 16:22:00', 'Secure Web Gateway','BPI', 'John Vincent Agbayani', 'BPI','Remote','troubleshooting','check version of software','install updates',' no recommendations',002);
+(001,'2018-01-08 12:24:00', '2018-01-08 15:05:00', 'Multi-Cloud','Unionbank','John Karlo Tabios','unionbank','OnSite','troubleshoot','checked if modules are up to date','install updates', 'no recommendations', ARRAY[['Isaiah Solomon'],['Aaron Hernandez']]),
+(001, '2018-03-08 13:32:00','2018-03-08 16:22:00', 'Secure Web Gateway','BPI', 'John Vincent Agbayani', 'BPI','Remote','troubleshooting','check version of software','install updates',' no recommendations',ARRAY[['John Jenkins']] );
 
 
 
