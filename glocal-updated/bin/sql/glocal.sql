@@ -12,7 +12,7 @@ CREATE TABLE vendor(
 
 CREATE TABLE client(
 	accountName varchar(50) unique PRIMARY KEY NOT NULL,
-	contact_details text[][] NOT NULL,
+	contact_details text[][][] NOT NULL,
 	company_address varchar(100) NOT NULL,
 	accountManager varchar(50) NOT NULL
 );
@@ -92,8 +92,8 @@ VALUES
 
 INSERT INTO client(accountName, contact_details, company_address, accountManager)
 VALUES
-('Unionbank', ARRAY[['Mareeah Koochenera','marreah@gmail.com','09178456789']],'157 HV Dela Costa','Mei' ),
-('BPI', ARRAY[['Garrosh','garrosh@gmail.com','09176230789']],'15 Jupiter','Mara');
+('Unionbank', ARRAY[['Mareeah Koochenera'],['marreah@gmail.com'],['09178456789']],'157 HV Dela Costa','Mei' ),
+('BPI', ARRAY[['Garrosh'],['garrosh@gmail.com'],['09176230789']],'15 Jupiter','Mara');
 
 INSERT INTO products(productName, vendor)
 VALUES
@@ -122,7 +122,7 @@ VALUES
 INSERT INTO activities(trackingNo, timeIn, timeOuts, productName, client,  contactCustomer, addres, typeOfActivity, purposeOfVisit, activityPerformed, nextActivity, recommendations, assignedSystemsEngineer)
 VALUES
 (001,'2018-01-08 12:24:00', '2018-01-08 15:05:00', 'Multi-Cloud','Unionbank','John Karlo Tabios','unionbank','OnSite','troubleshoot','checked if modules are up to date','install updates', 'no recommendations', ARRAY[['Isaiah Solomon'],['Aaron Hernandez']]),
-(001, '2018-03-08 13:32:00','2018-03-08 16:22:00', 'Secure Web Gateway','BPI', 'John Vincent Agbayani', 'BPI','Remote','troubleshooting','check version of software','install updates',' no recommendations',ARRAY[['John Jenkins']] );
+(001, '2018-03-08 13:32:00','2018-03-08 16:22:00', 'Secure Web Gateway','BPI', 'John Vincent Agbayani', 'BPI','Remote','troubleshooting','check version of software','install updates',' no recommendations',ARRAY[['2','John Jenkins']] );
 
 
 
