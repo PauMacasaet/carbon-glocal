@@ -95,10 +95,10 @@ router8.get('/dateRaised/:dateRaised', (request, response, next) => {
 });
 
 router8.post('/', (request, response, next) => {
-    const { vendorCaseId, dateIdCreated, dateRaised, caseTitle, caseDescription, severity, vendor, customer, productName, systemsEngineerLead, assignedAccountManager, assignedSystemsEngineer, leads, case_status } = request.body;
+    const { vendorCaseId, dateIdCreated, dateRaised, caseTitle, caseDescription, severity, vendor, customer, productName, systemsEngineerLead, assignedSystemsEngineer, case_status } = request.body;
 
     pool.query(
-        'INSERT INTO case_monitoring( vendorCaseId, dateIdCreated, dateRaised, caseTitle, caseDescription, severity, vendor, customer, productName, systemsEngineerLead, assignedAccountManager, assignedSystemsEngineer, leads, case_status) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)', [vendorCaseId, dateIdCreated, dateRaised, caseTitle, caseDescription, severity, vendor, customer, productName, systemsEngineerLead, assignedAccountManager, assignedSystemsEngineer, leads, case_status],
+        'INSERT INTO case_monitoring( vendorCaseId, dateIdCreated, dateRaised, caseTitle, caseDescription, severity, vendor, customer, productName, systemsEngineerLead, assignedSystemsEngineer, case_status) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)', [vendorCaseId, dateIdCreated, dateRaised, caseTitle, caseDescription, severity, vendor, customer, productName, systemsEngineerLead, assignedSystemsEngineer, case_status],
         (err, res) => {
             if (err) return next(err);
 
@@ -111,7 +111,7 @@ router8.post('/', (request, response, next) => {
 
 router8.put('/:glocalId', (request, response, next) => {
     const { glocalId } = request.params;
-    const keys = ['vendorCaseId', 'dateIdCreated', 'dateRaised', 'caseTitle', 'caseDescription', 'severity', 'vendor', 'customer', 'productName', 'systemsEngineerLead', 'assignedAccountManager', 'assignedSystemsEngineer', 'leads', 'case_status'];
+    const keys = ['vendorCaseId', 'dateIdCreated', 'dateRaised', 'caseTitle', 'caseDescription', 'severity', 'vendor', 'customer', 'productName', 'systemsEngineerLead', 'assignedSystemsEngineer', 'case_status'];
     const fields = [];
 
     keys.forEach(key => {
