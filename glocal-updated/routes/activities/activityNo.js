@@ -14,7 +14,7 @@ router3.get('/', (request, response, next) => {
 
 router3.get('/:activityNo', (request, response, next) => {
     const { activityNo } = request.params
-    pool.query("SELECT productName, typeOfActivity, purposeOfVisit, activityPerformed, nextActivity, recommendations, timeIn, timeOuts, CONCAT(firstName,' ', lastName) AS fullName FROM activities a JOIN engineer e ON a.engid = e.engId WHERE activityNo= ($1)", [activityNo], (err, res) => {
+    pool.query("SELECT activityNo, trackingNo AS glocalId, productName, cp.client, personName, typeOfActivity, purposeOfVisit, activityPerformed, nextActivity, recommendations, timeIn, timeOuts, assignedSystemsEngineer FROM activities a JOIN contact_person cp ON a.client = cp.client ORDER BY activityNo ASC WHERE activityNo = $1", [activityNo], (err, res) => {
         if (err) return next(err);
 
         console.log('RETRIEVING LIST from activities bY activityno');
@@ -23,10 +23,10 @@ router3.get('/:activityNo', (request, response, next) => {
 });
 
 router3.post('/', (request, response, next) => {
-    const { trackingNo, timeIn, timeOuts, productName, client, contactCustomer, addres, typeOfActivity, purposeOfVisit, activityPerformed, nextActivity, recommendations, engid, engineerName } = request.body;
+    const { trackingNo, timeIn, timeOuts, productName, client, addres, typeOfActivity, purposeOfVisit, activityPerformed, nextActivity, recommendations, assignedSystemsEngineer } = request.body;
 
     pool.query(
-        'INSERT INTO activities( trackingNo, timeIn, timeOuts, productName, client, contactCustomer, addres, typeOfActivity, purposeOfVisit, activityPerformed, nextActivity, recommendations, engid, engineerName) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)', [trackingNo, timeIn, timeOuts, productName, client, contactCustomer, addres, typeOfActivity, purposeOfVisit, activityPerformed, nextActivity, recommendations, engid, engineerName],
+        'INSERT INTO activities( trackingNo, timeIn, timeOuts, client, addres, typeOfActivity, purposeOfVisit, activityPerformed, nextActivity, recommendations, assignedSystemsEngineer) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)', [trackingNo, timeIn, timeOuts, productName, client, addres, typeOfActivity, purposeOfVisit, activityPerformed, nextActivity, recommendations, assignedSystemsEngineer],
         (err, res) => {
             if (err) return next(err);
 
@@ -39,7 +39,7 @@ router3.post('/', (request, response, next) => {
 
 router3.put('/:activityNo', (request, response, next) => {
     const { activityNo } = request.params;
-    const keys = ['trackingNo', 'timeIn', 'timeOuts', 'productName', 'client', 'contactCustomer', 'addres', 'typeOfActivity', 'purposeOfVisit', 'activityPerformed', 'nextActivity', 'recommendations', 'engid', 'engineerName'];
+    const keys = ['trackingNo', 'timeIn', 'timeOuts', 'productName', 'client', 'addres', 'typeOfActivity', 'purposeOfVisit', 'activityPerformed', 'nextActivity', 'recommendations', 'assignedSystemsEngineer'];
     const fields = [];
 
     keys.forEach(key => {
