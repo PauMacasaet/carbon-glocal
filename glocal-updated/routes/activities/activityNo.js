@@ -4,7 +4,7 @@ const pool = require('../../db');
 const router3 = Router();
 
 router3.get('/', (request, response, next) => {
-    pool.query("SELECT a.engid, productName, typeOfActivity, purposeOfVisit, activityPerformed, nextActivity, recommendations, timeIn, timeOuts, CONCAT(firstName,' ', lastName) AS fullName FROM activities a JOIN engineer e ON a.engid = e.engId", (err, res) => {
+    pool.query("SELECT activityNo, trackingNo AS glocalId, productName, cp.client, personName, typeOfActivity, purposeOfVisit, activityPerformed, nextActivity, recommendations, timeIn, timeOuts, assignedSystemsEngineer FROM activities a JOIN contact_person cp ON a.client = cp.client ORDER BY activityNo ASC", (err, res) => {
         if (err) return next(err);
 
         console.log('RETRIEVING ALL RECORDS FROM ACTIVITIES TABLE');
@@ -14,7 +14,7 @@ router3.get('/', (request, response, next) => {
 
 router3.get('/:activityNo', (request, response, next) => {
     const { activityNo } = request.params
-    pool.query("SELECT a.engid, productName, typeOfActivity, purposeOfVisit, activityPerformed, nextActivity, recommendations, timeIn, timeOuts, CONCAT(firstName,' ', lastName) AS fullName FROM activities a JOIN engineer e ON a.engid = e.engId WHERE activityNo= ($1)", [activityNo], (err, res) => {
+    pool.query("SELECT productName, typeOfActivity, purposeOfVisit, activityPerformed, nextActivity, recommendations, timeIn, timeOuts, CONCAT(firstName,' ', lastName) AS fullName FROM activities a JOIN engineer e ON a.engid = e.engId WHERE activityNo= ($1)", [activityNo], (err, res) => {
         if (err) return next(err);
 
         console.log('RETRIEVING LIST from activities bY activityno');
