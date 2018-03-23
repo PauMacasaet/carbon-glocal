@@ -14,7 +14,7 @@ router3.get('/', (request, response, next) => {
 
 router3.get('/:activityNo', (request, response, next) => {
     const { activityNo } = request.params
-    pool.query("SELECT activityNo, trackingNo AS glocalId, productName, cp.client, personName, typeOfActivity, purposeOfVisit, activityPerformed, nextActivity, recommendations, timeIn, timeOuts, assignedSystemsEngineer FROM activities a JOIN contact_person cp ON a.client = cp.client ORDER BY activityNo ASC WHERE activityNo = $1", [activityNo], (err, res) => {
+    pool.query("SELECT activityNo, trackingNo AS glocalId, productName, cp.client, personName, typeOfActivity, purposeOfVisit, activityPerformed, nextActivity, recommendations, timeIn, timeOuts, assignedSystemsEngineer FROM activities a JOIN contact_person cp ON a.client = cp.client WHERE activityNo = $1 ORDER BY activityNo ASC", [activityNo], (err, res) => {
         if (err) return next(err);
 
         console.log('RETRIEVING LIST from activities bY activityno');
