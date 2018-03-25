@@ -41,6 +41,7 @@ const engineername = require('./activities/engineername');
 const engid = require('./activities/engid');
 const activityNo = require('./activities/activityNo');
 const lastupdate = require('./activities/lastupdate');
+const glocal = require('./activities/glocal');
 
 //case monitoring
 const glocalid = require('./casemonitoring/glocalid');
@@ -103,6 +104,7 @@ router.use('/engineername', engineername);
 router.use('/engid', engid);
 router.use('/activityno', activityNo); //create and update
 router.use('/lastupdate', lastupdate);
+router.use('/tracking', glocal);
 
 //case monitoring
 router.use('/glocalid', glocalid); //create and update
