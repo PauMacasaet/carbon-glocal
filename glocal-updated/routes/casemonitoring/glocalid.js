@@ -4,7 +4,7 @@ const pool = require('../../db');
 const router8 = Router();
 
 router8.get('/', (request, response, next) => {
-    pool.query('SELECT glocalId, vendorCaseId, dateIdCreated, accountManager, assignedSystemsEngineer, case_status, caseDescription, caseTitle, customer, dateRaised, glocalId, productName, severity, systemsEngineerLead, vendor FROM case_monitoring JOIN client ON client.accountName = case_monitoring.customer ORDER BY glocalId ASC', (err, res) => {
+    pool.query('SELECT glocalId, vendorCaseId, dateIdCreated, accountManager, assignedSystemsEngineer, case_status, caseDescription, caseTitle, customer, dateRaised, glocalId, cm.productName, severity, systemsEngineerLead, vendor FROM case_monitoring cm JOIN client c ON c.accountName = cm.customer LEFT JOIN activities a ON cm.glocalid = a.trackingNo ORDER BY glocalId ASC', (err, res) => {
         if (err) return next(err);
 
         console.log('SHOWING ALL CASES');
