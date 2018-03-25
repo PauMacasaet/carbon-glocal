@@ -120,7 +120,7 @@ VALUES
 INSERT INTO activities(trackingNo, timeIn, timeOuts, productName, client, addres, typeOfActivity, purposeOfVisit, activityPerformed, nextActivity, recommendations, assignedSystemsEngineer)
 VALUES
 (001,'2018-01-08 12:24:00', '2018-01-08 15:05:00', 'Multi-Cloud','Unionbank','unionbank','OnSite','troubleshoot','checked if modules are up to date','install updates', 'no recommendations', ARRAY[['Isaiah Solomon'],['Aaron Hernandez']]),
-(001, '2018-03-08 13:32:00','2018-03-08 16:22:00', 'Secure Web Gateway','BPI', 'BPI','Remote','troubleshooting','check version of software','install updates',' no recommendations',ARRAY[['2','John Jenkins']] );
+(001, '2018-03-08 13:32:00','2018-03-08 16:22:00', 'Secure Web Gateway','BPI', 'BPI','Remote','troubleshooting','check version of software','install updates',' no recommendations',ARRAY[['John Jenkins']] );
 
 
 

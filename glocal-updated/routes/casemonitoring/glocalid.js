@@ -20,7 +20,7 @@ router8.get('/search', (request, response, next) => {
 
 router8.get('/:glocalId', (request, response, next) => {
     const { glocalId } = request.params
-    pool.query('SELECT *  FROM case_monitoring WHERE glocalId = ($1)', [glocalId], (err, res) => {
+    pool.query('SELECT glocalId, vendorCaseId, dateIdCreated, accountManager, assignedSystemsEngineer, case_status, caseDescription, caseTitle, customer, dateRaised, glocalId, productName, severity, systemsEngineerLead, vendor FROM case_monitoring JOIN client ON client.accountName = case_monitoring.customer WHERE glocalId = ($1) ORDER BY glocalId ASC', [glocalId], (err, res) => {
         if (err) return next(err);
 
         console.log('RETRIEVING LIST BY glocalId');
