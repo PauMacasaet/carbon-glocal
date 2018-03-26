@@ -4,7 +4,7 @@ const pool = require('../../db');
 const router = Router();
 
 router.get('/', (request, response, next) => {
-    pool.query("SELECT activityNo, productName, client, contactCustomer, typeOfActivity, purposeOfVisit, activityPerformed, nextActivity, recommendations, assignedSystemsEngineer AS Engineers FROM activities", (err, res) => {
+    pool.query("SELECT activityNo, productName, client, typeOfActivity, purposeOfVisit, activityPerformed, nextActivity, recommendations, assignedSystemsEngineer AS Engineers FROM activities", (err, res) => {
         if (err) return next(err);
 
         console.log('RETRIEVING ALL engineer activities');
@@ -12,9 +12,9 @@ router.get('/', (request, response, next) => {
     });
 });
 
-router.get('/:assignedSystemsEngineer', (request, response, next) => {
-    const { assignedSystemsEngineer } = request.params
-    pool.query('SELECT activityNo, productName, client, contactCustomer, typeOfActivity, purposeOfVisit, activityPerformed, nextActivity, recommendations, engid FROM activities WHERE assignedSystemsEngineer = $1 ', [assignedSystemsEngineer], (err, res) => {
+router.get('/:engineerId', (request, response, next) => {
+    const { engineerId } = request.params
+    pool.query('SELECT activityNo, productName, client, typeOfActivity, purposeOfVisit, activityPerformed, nextActivity, recommendations, assignedSystemsEngineer FROM activities JOIN engineer ON activities.engineerId = engineer.engid WHERE engineerId = $1 ', [engineerId], (err, res) => {
         if (err) return next(err);
 
         console.log('RETRIEVING activity by engineer id');
