@@ -1,9 +1,13 @@
-CREATE TABLE engineer(
-	engid serial unique PRIMARY KEY NOT NULL,
-	department varchar(50) NOT NULL,
-	firstName varchar(50) NOT NULL,
-	lastName varchar(50) NOT NULL,
-	isLead boolean NOT NULL
+CREATE TYPE post AS ENUM('Director','Sales Manager','Technical Manager','System Engineer','Account Manager');
+
+CREATE TABLE users(
+	userid serial unique PRIMARY KEY, 
+	full_name varchar(50) unique,
+	username varchar(50),
+	pw varchar (50),
+	email varchar(50),
+	contactnumber varchar(50),
+	position post
 );
 
 CREATE TABLE vendor(
@@ -59,6 +63,8 @@ CREATE TABLE case_monitoring(
 	case_status varchar(50) NOT NULL
 );
 
+CREATE TYPE typeAct AS ENUM('Onsite','Implementation','Remote','POC');
+
 CREATE TABLE activities(
 	trackingNo int references case_monitoring(glocalId) ON UPDATE CASCADE NOT NULL,
 	activityNo serial,
@@ -67,21 +73,27 @@ CREATE TABLE activities(
 	productName varchar(50) references products(productName) ON UPDATE CASCADE NOT NULL,
 	client varchar(50) NOT NULL,
 	addres varchar(100) NOT NULL, 
-	typeOfActivity varchar(50) NOT NULL, 
+	typeOfActivity typeAct, 
 	purposeOfVisit varchar(50) NOT NULL,
 	activityPerformed varchar(2000) NOT NULL,
 	nextActivity varchar(2000) NOT NULL,
-	engineerId int references engineer(engid) ON UPDATE CASCADE,
+	engineerId int references users(userid) ON UPDATE CASCADE,
 	recommendations varchar(2000),
 	assignedSystemsEngineer text[][] NOT NULL
 );
 
-INSERT INTO engineer(department, firstName, lastName, isLead)
-VALUES 
-('Security','John','Jenkins', FALSE),
-('Availability','Isaiah','Solomon', FALSE),
-( 'Security','Aaron','Hernandez', FALSE),
-( 'Availability', 'Richard', 'Cruz', TRUE);
+INSERT INTO users(full_name, username, pw, email, contactnumber, position)
+VALUES
+('John Jenkins','JJenkins','jjenkins','jjenkins@gmail.com','911','System Engineer'),
+('Isaiah Solomon','ISolomon','isolomon','icesolomon@gmail.com','112','System Engineer'),
+('Aaron Hernandez','Ahernz','ahernz','ahernandez@gmail.com','711','System Engineer'),
+('Sonny Pascasio','SonnyP','sonnyp','sonny@gmail.com','123235','Director'),
+('Dominique Pascasio','Domp','domp','dom@gmail.com','91284435','Account Manager'),
+('Avery Si','AveSi','avesi','ave@gmail.com','0917234452345','Technical Manager'),
+('Jefferson Ong','JOng','jong','jong@gmail.com','091242351253','System Engineer'),
+('Jeffrey Jonas','JJonas','jonas','jonas@gmail.com','32134512514225','System Engineer'),
+('Oliver de los Santos','OdlSantos','osantos','oliver@gmail.com','23413451452','System Engineer'),
+('Alexis Collado','Alex','alex','alex@gmail.com','90127236123','Sales Manager');
 
 INSERT INTO vendor(principal)
 VALUES
@@ -110,17 +122,17 @@ VALUES
 
 INSERT INTO case_monitoring(vendorCaseId, dateIdCreated, dateRaised, caseTitle, caseDescription, severity, vendor, customer, productName, systemsEngineerLead, case_status)
 VALUES
-('JF1','01/08/2018','01/07/2018','Attend to failure of backup','troubleshoot',1,'Veritas','Unionbank','Multi-Cloud','Jefferson','Ongoing'),
-('JF2','03/08/2018','03/07/2018','Fix server for backup','install updates',1,'Symantec','BPI','Secure Web Gateway','Jeffrey', 'Resolved'),
-('JF3','04/04/2018', '04/01/2018', 'Error 404', 'fix error', 2, 'Veritas', 'BPI', 'Secure Web Gateway', 'Jefferson', 'Ongoing'),
-('JF4', '04/07/2018', '04/06/2018', 'Fix server for backup', 'install updates', 2, 'Symantec', 'Unionbank', 'Multi-Cloud', 'Oliver', 'Pending (Glo-cal)'),
-('JF5', '05/11/2018', '05/09/2018', 'Attend to failure of backup', 'troubleshoot', 2, 'Veritas', 'BPI', 'Secure Web Gateway', 'Jeffrey', 'Pending (Client)'),
-('JF6', '05/11/2018', '05/09/2018', 'Attend to failure of backup', 'troubleshoot', 2, 'Veritas', 'BPI', 'Secure Web Gateway', 'Jeffrey', 'Pending (Client)');
+('JF1','01/08/2018','01/07/2018','Attend to failure of backup','troubleshoot',1,'Veritas','Unionbank','Multi-Cloud','Jefferson Ong','Ongoing'),
+('JF2','03/08/2018','03/07/2018','Fix server for backup','install updates',1,'Symantec','BPI','Secure Web Gateway','Jeffrey Jonas', 'Resolved'),
+('JF3','04/04/2018', '04/01/2018', 'Error 404', 'fix error', 2, 'Veritas', 'BPI', 'Secure Web Gateway', 'Jefferson Ong', 'Ongoing'),
+('JF4', '04/07/2018', '04/06/2018', 'Fix server for backup', 'install updates', 2, 'Symantec', 'Unionbank', 'Multi-Cloud', 'Oliver de los Santos', 'Pending (Glo-cal)'),
+('JF5', '05/11/2018', '05/09/2018', 'Attend to failure of backup', 'troubleshoot', 2, 'Veritas', 'BPI', 'Secure Web Gateway', 'Jeffrey Jonas', 'Pending (Client)'),
+('JF6', '05/11/2018', '05/09/2018', 'Attend to failure of backup', 'troubleshoot', 2, 'Veritas', 'BPI', 'Secure Web Gateway', 'Jeffrey Jonas', 'Pending (Client)');
 
 INSERT INTO activities(trackingNo, timeIn, timeOuts, productName, client, addres, typeOfActivity, purposeOfVisit, activityPerformed, nextActivity,engineerId, recommendations, assignedSystemsEngineer)
 VALUES
-(001,'2018-01-08 12:24:00', '2018-01-08 15:05:00', 'Multi-Cloud','Unionbank','unionbank','OnSite','troubleshoot','checked if modules are up to date','install updates',2, 'no recommendations', ARRAY[['Isaiah Solomon'],['Aaron Hernandez']]),
-(001, '2018-03-08 13:32:00','2018-03-08 16:22:00', 'Secure Web Gateway','BPI', 'BPI','Remote','troubleshooting','check version of software','install updates', 1, ' no recommendations',ARRAY[['John Jenkins']] );
+(001,'2018-01-08 12:24:00', '2018-01-08 15:05:00', 'Multi-Cloud','Unionbank','unionbank','Onsite','troubleshoot','checked if modules are up to date','install updates',3, 'no recommendations', ARRAY[['Isaiah Solomon'],['Aaron Hernandez']]),
+(001, '2018-03-08 13:32:00','2018-03-08 16:22:00', 'Secure Web Gateway','BPI', 'BPI','Remote','troubleshooting','check version of software','install updates', 2, ' no recommendations',ARRAY[['John Jenkins']] );
 
 
 

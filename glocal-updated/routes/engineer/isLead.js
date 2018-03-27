@@ -4,20 +4,10 @@ const pool = require('../../db');
 const router3 = Router();
 
 router3.get('/', (request, response, next) => {
-    pool.query('SELECT * from engineer ORDER BY engId ASC', (err, res) => {
+    pool.query("SELECT glocalId, full_name, email, contactnumber, caseTitle, caseDescription, case_status from users JOIN case_monitoring ON users.full_name = case_monitoring.systemsEngineerLead WHERE position = 'System Engineer' ", (err, res) => {
         if (err) return next(err);
 
         console.log('RETRIEVING ALL RECORDS FROM ENGINEER TABLE');
-        response.json(res.rows);
-    });
-});
-
-router3.get('/:isLead', (request, response, next) => {
-    const { isLead } = request.params
-    pool.query('SELECT *  FROM engineer WHERE isLead = ($1)', [isLead], (err, res) => {
-        if (err) return next(err);
-
-        console.log('RETRIEVING LIST BY SELead bool');
         response.json(res.rows);
     });
 });

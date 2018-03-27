@@ -12,9 +12,9 @@ router.get('/', (request, response, next) => {
     });
 });
 
-router.get('/:engineerId', (request, response, next) => {
-    const { engineerId } = request.params
-    pool.query('SELECT activityNo, productName, client, typeOfActivity, purposeOfVisit, activityPerformed, nextActivity, recommendations, assignedSystemsEngineer FROM activities JOIN engineer ON activities.engineerId = engineer.engid WHERE engineerId = $1 ', [engineerId], (err, res) => {
+router.get('/:assignedSystemsEngineer', (request, response, next) => {
+    const { assignedSystemsEngineer } = request.params
+    pool.query('SELECT activityNo, productName, client, typeOfActivity, purposeOfVisit, activityPerformed, nextActivity, recommendations, assignedSystemsEngineer FROM activities WHERE assignedSystemsEngineer = $1 ', [assignedSystemsEngineer], (err, res) => {
         if (err) return next(err);
 
         console.log('RETRIEVING activity by engineer id');

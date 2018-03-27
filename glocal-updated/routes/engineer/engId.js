@@ -4,17 +4,17 @@ const pool = require('../../db');
 const router = Router();
 
 router.get('/', (request, response, next) => {
-    pool.query('SELECT * from engineer ORDER BY engId ASC', (err, res) => {
+    pool.query("SELECT * from users WHERE position = 'System Engineer' ", (err, res) => {
         if (err) return next(err);
 
-        console.log('RETRIEVING ALL RECORDS FROM ENGINEER TABLE');
+        console.log('SHOWING ALL ENGINEERS');
         response.json(res.rows);
     });
 });
 
-router.get('/:engId', (request, response, next) => {
-    const { engId } = request.params
-    pool.query('SELECT * FROM engineer WHERE engId = $1', [engId], (err, res) => {
+router.get('/:userid', (request, response, next) => {
+    const { userid } = request.params
+    pool.query('SELECT * FROM users WHERE userid = $1', [userid], (err, res) => {
         if (err) return next(err);
 
         console.log('RETRIEVING LIST BY ID');
@@ -22,24 +22,9 @@ router.get('/:engId', (request, response, next) => {
     });
 });
 
-router.post('/', (request, response, next) => {
-    const { engId, department, firstName, lastName, isLead } = request.body;
-
-    pool.query(
-        'INSERT INTO engineer( engId, department, firstName, lastName, isLead) VALUES($1, $2, $3, $4, $5)', [engId, department, firstName, lastName, isLead],
-        (err, res) => {
-            if (err) return next(err);
-
-            response.json({
-                "create engineer": "engineer deleted"
-            });
-        }
-    );
-});
-
-router.put('/:engId', (request, response, next) => {
-    const { engId } = request.params;
-    const keys = ['engId', 'department', 'firstName', 'lastName', 'isLead'];
+router.put('/:userid', (request, response, next) => {
+    const { userid } = request.params;
+    const keys = ['full_name', 'username', 'pw', 'email', 'contactnumber'];
     const fields = [];
 
     keys.forEach(key => {
@@ -49,7 +34,7 @@ router.put('/:engId', (request, response, next) => {
     //partial updating
     fields.forEach((field, index) => {
         pool.query(
-            `UPDATE engineer SET ${field} = ($1) WHERE engId =($2)`, [request.body[field], engId],
+            `UPDATE users SET ${field} = ($1) WHERE userid =($2)`, [request.body[field], userid],
             (err, res) => {
                 if (err) return next(err);
 
@@ -63,11 +48,11 @@ router.put('/:engId', (request, response, next) => {
     });
 });
 
-router.delete('/:engId', (request, response, next) => {
-    const { engId } = request.params;
+router.delete('/:userid', (request, response, next) => {
+    const { userid } = request.params;
 
     pool.query(
-        'DELETE FROM engineer WHERE engId = ($1)', [engId],
+        'DELETE FROM engineer WHERE userid = ($1)', [userid],
         (err, res) => {
             if (err) return next(err);
 

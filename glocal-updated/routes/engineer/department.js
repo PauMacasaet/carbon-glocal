@@ -3,21 +3,33 @@ const pool = require('../../db');
 
 const router3 = Router();
 
+
 router3.get('/', (request, response, next) => {
-    pool.query('SELECT * from engineer ORDER BY engId ASC', (err, res) => {
+
+    pool.query("SELECT * FROM users", (err, res) => {
         if (err) return next(err);
 
-        console.log('RETRIEVING ALL RECORDS FROM ENGINEER TABLE');
+        console.log('RETRIEVING ALL Employees');
         response.json(res.rows);
     });
 });
 
-router3.get('/:department', (request, response, next) => {
-    const { department } = request.params
-    pool.query('SELECT *  FROM engineer WHERE department= ($1)', [department], (err, res) => {
+router3.get('/se', (request, response, next) => {
+
+    pool.query("SELECT * FROM users WHERE position= 'System Engineer' ", (err, res) => {
         if (err) return next(err);
 
-        console.log('RETRIEVING LIST BY DEPARTMENT');
+        console.log('RETRIEVING ALL SYSTEMS ENGINEER');
+        response.json(res.rows);
+    });
+});
+
+router3.get('/am', (request, response, next) => {
+
+    pool.query("SELECT * FROM users WHERE position= 'Account Manager' ", (err, res) => {
+        if (err) return next(err);
+
+        console.log('RETRIEVING ALL SYSTEMS ENGINEER');
         response.json(res.rows);
     });
 });

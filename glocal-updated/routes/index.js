@@ -66,7 +66,7 @@ const router = Router();
 //engineer routes
 router.use('/engineer', engId); //create and update
 router.use('/name', name);
-router.use('/department', department);
+router.use('/position', department);
 router.use('/isLead', isLead);
 router.use('/engactivities', engActivities);
 
