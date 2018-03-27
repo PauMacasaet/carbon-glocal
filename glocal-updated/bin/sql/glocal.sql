@@ -18,7 +18,7 @@ CREATE TABLE client(
 	accountName varchar(50) unique PRIMARY KEY NOT NULL,
 	contact_details text[][][] NOT NULL,
 	company_address varchar(100) NOT NULL,
-	accountManager varchar(50) NOT NULL
+	accountManager varchar(50) references users(full_name) NOT NULL
 );
 
 CREATE TABLE products(
@@ -93,6 +93,8 @@ VALUES
 ('Jefferson Ong','JOng','jong','jong@gmail.com','091242351253','System Engineer'),
 ('Jeffrey Jonas','JJonas','jonas','jonas@gmail.com','32134512514225','System Engineer'),
 ('Oliver de los Santos','OdlSantos','osantos','oliver@gmail.com','23413451452','System Engineer'),
+('Mei Wang','mei','meiop','mei@gmail.com','1293423932','Account Manager'),
+('Mara Mondragon','mhar','msadf','mhar@gmail.com','1324132','Account Manager'),
 ('Alexis Collado','Alex','alex','alex@gmail.com','90127236123','Sales Manager');
 
 INSERT INTO vendor(principal)
@@ -102,8 +104,8 @@ VALUES
 
 INSERT INTO client(accountName, contact_details, company_address, accountManager)
 VALUES
-('Unionbank', ARRAY[['Mareeah Koochenera'],['marreah@gmail.com'],['09178456789']],'157 HV Dela Costa','Mei' ),
-('BPI', ARRAY[['Garrosh'],['garrosh@gmail.com'],['09176230789']],'15 Jupiter','Mara');
+('Unionbank', ARRAY[['Mareeah Koochenera'],['marreah@gmail.com'],['09178456789']],'157 HV Dela Costa','Mei Wang' ),
+('BPI', ARRAY[['Garrosh'],['garrosh@gmail.com'],['09176230789']],'15 Jupiter','Mara Mondragon');
 
 INSERT INTO products(productName, vendor)
 VALUES
