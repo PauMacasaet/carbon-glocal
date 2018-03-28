@@ -77,7 +77,6 @@ CREATE TABLE activities(
 	purposeOfVisit varchar(50) NOT NULL,
 	activityPerformed varchar(2000) NOT NULL,
 	nextActivity varchar(2000) NOT NULL,
-	engineerId int references users(userid) ON UPDATE CASCADE,
 	recommendations varchar(2000),
 	assignedSystemsEngineer text[][] NOT NULL
 );
@@ -131,10 +130,10 @@ VALUES
 ('JF5', '05/11/2018', '05/09/2018', 'Attend to failure of backup', 'troubleshoot', 2, 'Veritas', 'BPI', 'Secure Web Gateway', 'Jeffrey Jonas', 'Pending (Client)'),
 ('JF6', '05/11/2018', '05/09/2018', 'Attend to failure of backup', 'troubleshoot', 2, 'Veritas', 'BPI', 'Secure Web Gateway', 'Jeffrey Jonas', 'Pending (Client)');
 
-INSERT INTO activities(trackingNo, timeIn, timeOuts, productName, client, addres, typeOfActivity, purposeOfVisit, activityPerformed, nextActivity,engineerId, recommendations, assignedSystemsEngineer)
+INSERT INTO activities(trackingNo, timeIn, timeOuts, productName, client, addres, typeOfActivity, purposeOfVisit, activityPerformed, nextActivity, recommendations, assignedSystemsEngineer)
 VALUES
-(001,'2018-01-08 12:24:00', '2018-01-08 15:05:00', 'Multi-Cloud','Unionbank','unionbank','Onsite','troubleshoot','checked if modules are up to date','install updates',3, 'no recommendations', ARRAY[['Isaiah Solomon'],['Aaron Hernandez']]),
-(001, '2018-03-08 13:32:00','2018-03-08 16:22:00', 'Secure Web Gateway','BPI', 'BPI','Remote','troubleshooting','check version of software','install updates', 2, ' no recommendations',ARRAY[['John Jenkins']] );
+(001,'2018-01-08 12:24:00', '2018-01-08 15:05:00', 'Multi-Cloud','Unionbank','unionbank','Onsite','troubleshoot','checked if modules are up to date','install updates', 'no recommendations', ARRAY[['Isaiah Solomon'],['Aaron Hernandez']]),
+(001, '2018-03-08 13:32:00','2018-03-08 16:22:00', 'Secure Web Gateway','BPI', 'BPI','Remote','troubleshooting','check version of software','install updates', ' no recommendations',ARRAY[['John Jenkins']] );
 
 
 

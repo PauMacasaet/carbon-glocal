@@ -14,7 +14,7 @@ router2.get('/', (request, response, next) => {
 
 router2.get('/:full_name', (request, response, next) => {
     const { full_name } = request.params
-    pool.query('SELECT *  FROM users WHERE full_name = ($1)', [full_name], (err, res) => {
+    pool.query("SELECT *  FROM users WHERE full_name = ($1) AND position = 'System Engineer'", [full_name], (err, res) => {
         if (err) return next(err);
 
         console.log('RETRIEVING LIST BY last name');
